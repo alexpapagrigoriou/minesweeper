@@ -2,6 +2,8 @@
 
 #include <ncurses.h>
 
+#include "board/board.h"
+
 void minesweeper_run(void) {
     initscr();
     cbreak();
@@ -10,8 +12,8 @@ void minesweeper_run(void) {
     mousemask(ALL_MOUSE_EVENTS | REPORT_MOUSE_POSITION, NULL);
     curs_set(FALSE);
 
-    printw("Minesweeper");
-    getch();
+    Board board;
+    board_init(&board);
 
     endwin();
 }
