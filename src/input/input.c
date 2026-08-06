@@ -23,7 +23,7 @@ Action input_get(void) {
 
         if (ch == KEY_RESIZE) {
             layout_update();
-            continue;
+            return action_create(-1, 0, false);
         }
 
         if (ch == KEY_ESC) {

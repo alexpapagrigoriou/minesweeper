@@ -3,6 +3,8 @@
 #include <ncurses.h>
 
 #include "game.h"
+#include "ui/layout.h"
+#include "ui/render.h"
 
 void minesweeper_run(void) {
     initscr();
@@ -12,11 +14,13 @@ void minesweeper_run(void) {
     mousemask(ALL_MOUSE_EVENTS | REPORT_MOUSE_POSITION, NULL);
     curs_set(FALSE);
 
+    layout_update();
+
     Game game;
     game_init(&game);
 
     while (game.state == PLAYING) {
-        // render_game(&game);
+        render_game(&game);
 
         Action action = input_get();
 

@@ -7,7 +7,9 @@ void game_init(Game* game) {
 
 void game_update(Game* game, Action action) {
     if (action.row == -1) {
-        game->state = EXITED;
+        if (action.col == -1) {
+            game->state = EXITED;
+        }
         return;
     }
 }
