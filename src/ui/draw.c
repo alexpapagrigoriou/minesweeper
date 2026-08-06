@@ -3,15 +3,34 @@
 #include <ncurses.h>
 #include <string.h>
 
-void draw_text_centered(int term_rows, int term_cols, const char* msg, int color_pair, int attrs) {
+#include "colors.h"
+#include "layout.h"
+
+static void draw_text_centered(const char* msg, int color_pair, int attrs) {
     attron(COLOR_PAIR(color_pair) | attrs);
-    mvaddstr(term_rows / 2, (term_cols - strlen(msg)) / 2, msg);
+    mvaddstr(get_term_rows() / 2, (get_term_cols() - strlen(msg)) / 2, msg);
     attroff(COLOR_PAIR(color_pair) | attrs);
 }
 
-void draw_text_term_small_msg(int term_rows, int term_cols) {
+static void draw_text_centered_col(int row, const char* msg, int color_pair, int attrs) {
+    attron(COLOR_PAIR(color_pair) | attrs);
+    mvaddstr(row, (get_term_cols() - strlen(msg)) / 2, msg);
+    attroff(COLOR_PAIR(color_pair) | attrs);
+}
+
+void draw_text_term_small_msg(void) {
     clear();
-    draw_text_centered(term_rows, term_cols, "Terminal too small", 0, A_BOLD);
+    draw_text_centered("Terminal too small", CP_TERM_SMALL, A_BOLD);
+    refresh();
+}
+
+void draw_text_won_msg(void) {
+    draw_text_centered_col(get_win_start_row(), " You won! ", CP_WON, A_BOLD);
+    refresh();
+}
+
+void draw_text_lost_msg(void) {
+    draw_text_centered_col(get_win_start_row(), " You lost! ", CP_LOST, A_BOLD);
     refresh();
 }
 

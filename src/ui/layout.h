@@ -24,6 +24,9 @@
 
 void layout_update(void);
 
+int get_term_rows(void);
+int get_term_cols(void);
+
 int get_win_start_row(void);
 int get_win_start_col(void);
 

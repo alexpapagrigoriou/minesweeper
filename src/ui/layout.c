@@ -4,16 +4,16 @@
 
 #include "draw.h"
 
+static int term_rows, term_cols;
 static int win_start_row, win_start_col;
 static int exit_start_row, exit_start_col;
 static int board_start_row, board_start_col;
 
 void layout_update(void) {
-    int term_rows, term_cols;
     getmaxyx(stdscr, term_rows, term_cols);
 
     if (term_rows < WIN_ROWS || term_cols < WIN_COLS) {
-        draw_text_term_small_msg(term_rows, term_cols);
+        draw_text_term_small_msg();
 
         while (1) {
             int ch = getch();
@@ -25,7 +25,7 @@ void layout_update(void) {
             getmaxyx(stdscr, term_rows, term_cols);
 
             if (term_rows < WIN_ROWS || term_cols < WIN_COLS) {
-                draw_text_term_small_msg(term_rows, term_cols);
+                draw_text_term_small_msg();
                 continue;
             }
 
@@ -41,6 +41,14 @@ void layout_update(void) {
 
     board_start_row = win_start_row + WIN_BOARD_ROW_TOP_OFFSET;
     board_start_col = win_start_col + WIN_BOARD_COL_LEFT_OFFSET;
+}
+
+int get_term_rows(void) {
+    return term_rows;
+}
+
+int get_term_cols(void) {
+    return term_cols;
 }
 
 int get_win_start_row(void) {

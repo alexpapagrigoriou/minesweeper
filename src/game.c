@@ -24,6 +24,36 @@ void game_update(Game* game, Action action) {
         return;
     }
 
-    // TODO: check if the move did something and if yes set update to true
-    // game->update = true;
+    int cell = layout_get_board_cell(action.row, action.col);
+
+    if (cell == -1) {
+        return;
+    }
+
+    if (board_is_revealed(&game->board, cell)) {
+        return;
+    }
+
+    if (!action.is_left_click) {
+        board_toggle_flag(&game->board, cell);
+        game->update = true;
+        return;
+    }
+
+    if (board_is_flagged(&game->board, cell)) {
+        return;
+    }
+
+    if (board_has_mine(&game->board, cell)) {
+        game->board.cells[cell] = LOST_MINE;
+        game->state = LOST;
+        return;
+    }
+
+    board_reveal(&game->board, cell);
+    game->update = true;
+
+    if (board_is_complete(&game->board)) {
+        game->state = WON;
+    }
 }
