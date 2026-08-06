@@ -5,7 +5,9 @@ void game_init(Game* game) {
     game->state = PLAYING;
 }
 
-void game_update(Game* game, Position pos) {
-    (void)game;
-    (void)pos;
+void game_update(Game* game, Action action) {
+    if (action.row == -1) {
+        game->state = EXITED;
+        return;
+    }
 }

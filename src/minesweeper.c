@@ -16,6 +16,11 @@ void minesweeper_run(void) {
     game_init(&game);
 
     while (game.state == PLAYING) {
+        // render_game(&game);
+
+        Action action = input_get();
+
+        game_update(&game, action);
     }
 
     endwin();

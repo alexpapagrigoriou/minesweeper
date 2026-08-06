@@ -1,12 +1,13 @@
 #pragma once
 
 #include "board/board.h"
-#include "position.h"
+#include "input/input.h"
 
 typedef enum {
     PLAYING,
     WON,
-    LOST
+    LOST,
+    EXITED
 } GameState;
 
 typedef struct {
@@ -16,4 +17,4 @@ typedef struct {
 
 void game_init(Game* game);
 
-void game_update(Game* game, Position pos);
+void game_update(Game* game, Action action);
