@@ -42,3 +42,23 @@ void render_game(Game* game) {
 
     refresh();
 }
+
+void render_end(Game* game) {
+    if (game->state == EXITED) {
+        return;
+    }
+
+    game->update = true;
+
+    render_game(game);
+
+    if (game->state == WON) {
+        draw_text_won_msg();
+    } else if (game->state == LOST) {
+        draw_text_lost_msg();
+    }
+
+    refresh();
+
+    getch();
+}

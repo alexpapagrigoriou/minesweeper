@@ -26,12 +26,10 @@ void draw_text_term_small_msg(void) {
 
 void draw_text_won_msg(void) {
     draw_text_centered_col(get_win_start_row(), " You won! ", CP_WON, A_BOLD);
-    refresh();
 }
 
 void draw_text_lost_msg(void) {
     draw_text_centered_col(get_win_start_row(), " You lost! ", CP_LOST, A_BOLD);
-    refresh();
 }
 
 void draw_box(int row, int col, int rows, int cols, int color_pair) {

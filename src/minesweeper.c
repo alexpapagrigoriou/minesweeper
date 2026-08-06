@@ -4,7 +4,6 @@
 
 #include "game.h"
 #include "ui/colors.h"
-#include "ui/draw.h"
 #include "ui/layout.h"
 #include "ui/render.h"
 
@@ -31,12 +30,7 @@ void minesweeper_run(void) {
         game_update(&game, action);
     }
 
-    if (game.state == WON) {
-        draw_text_won_msg();
-    } else if (game.state == LOST) {
-        // TODO: show lost board
-        draw_text_lost_msg();
-    }
+    render_end(&game);
 
     endwin();
 }
