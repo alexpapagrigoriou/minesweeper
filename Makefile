@@ -73,4 +73,7 @@ gdb: debug
 clean:
 	@rm -rf $(BUILD_DIR) $(BIN_DIR)
 
-.PHONY: run debug run-debug release run-release gdb clean
+compile-db:
+	@bear -- make -B debug
+
+.PHONY: run debug run-debug release run-release gdb clean compile-db
