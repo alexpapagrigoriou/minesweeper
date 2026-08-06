@@ -39,8 +39,8 @@ void layout_update(void) {
     exit_start_row = win_start_row;
     exit_start_col = win_start_col + WIN_COLS - EXIT_COLS;
 
-    board_start_row = win_start_row + WIN_BOARD_ROW_OFFSET;
-    board_start_col = win_start_col + WIN_BOARD_COL_OFFSET;
+    board_start_row = win_start_row + WIN_BOARD_ROW_TOP_OFFSET;
+    board_start_col = win_start_col + WIN_BOARD_COL_LEFT_OFFSET;
 }
 
 int get_exit_start_row(void) {

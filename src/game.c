@@ -1,5 +1,7 @@
 #include "game.h"
 
+#include "ui/layout.h"
+
 void game_init(Game* game) {
     board_init(&game->board);
     game->state = PLAYING;
@@ -10,6 +12,11 @@ void game_update(Game* game, Action action) {
         if (action.col == -1) {
             game->state = EXITED;
         }
+        return;
+    }
+
+    if (action.is_left_click && layout_is_exit(action.row, action.col)) {
+        game->state = EXITED;
         return;
     }
 }
