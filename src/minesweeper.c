@@ -2,7 +2,7 @@
 
 #include <ncurses.h>
 
-#include "board/board.h"
+#include "game.h"
 
 void minesweeper_run(void) {
     initscr();
@@ -12,8 +12,11 @@ void minesweeper_run(void) {
     mousemask(ALL_MOUSE_EVENTS | REPORT_MOUSE_POSITION, NULL);
     curs_set(FALSE);
 
-    Board board;
-    board_init(&board);
+    Game game;
+    game_init(&game);
+
+    while (game.state == PLAYING) {
+    }
 
     endwin();
 }
