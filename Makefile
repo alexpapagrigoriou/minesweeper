@@ -21,10 +21,11 @@ RELEASE_OBJS := $(SRCS:$(SRC_DIR)/%.c=$(RELEASE_BUILD_DIR)/%.o)
 DEPS := $(shell find $(BUILD_DIR) -name '*.d' 2>/dev/null)
 -include $(DEPS)
 
+STD_FLAGS := -std=c11
 WARN_FLAGS := -Wall -Wextra -Wpedantic -Werror
 DEP_FLAGS := -MMD -MP
 
-COMMON_FLAGS := $(WARN_FLAGS) $(DEP_FLAGS)
+COMMON_FLAGS := $(STD_FLAGS) $(WARN_FLAGS) $(DEP_FLAGS)
 
 CFLAGS_DEBUG := $(COMMON_FLAGS) -g3 -O0 -DDEBUG
 CFLAGS_RELEASE := $(COMMON_FLAGS) -O2 -flto -DNDEBUG
