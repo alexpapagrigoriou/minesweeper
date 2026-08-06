@@ -21,3 +21,7 @@ Position position_from_index(int index, int width) {
 int position_to_index(Position pos, int width) {
     return pos.row * width + pos.col;
 }
+
+bool position_is_valid(Position pos, int height, int width) {
+    return pos.row >= 0 && pos.row < height && pos.col >= 0 && pos.col < width;
+}

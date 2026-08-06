@@ -29,20 +29,19 @@ void board_init(Board* board) {
                         continue;
                     }
 
-                    int next_row = mine_pos.row + row;
-                    int next_col = mine_pos.col + col;
+                    Position neighbor_pos = position_create(mine_pos.row + row, mine_pos.col + col);
 
-                    if (next_row < 0 || next_row >= BOARD_SIZE || next_col < 0 || next_col >= BOARD_SIZE) {
+                    if (!position_is_valid(neighbor_pos, BOARD_SIZE, BOARD_SIZE)) {
                         continue;
                     }
 
-                    int next_index = position_to_index(position_create(next_row, next_col), BOARD_SIZE);
+                    int neighbor = position_to_index(neighbor_pos, BOARD_SIZE);
 
-                    if (board->cells[next_index] == MINE) {
+                    if (board->cells[neighbor] == MINE) {
                         continue;
                     }
 
-                    board->cells[next_index]++;
+                    board->cells[neighbor]++;
                 }
             }
 

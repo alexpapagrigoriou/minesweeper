@@ -2,4 +2,4 @@
 
 #include "../board/board.h"
 
-void reveal_cell(Board* board, int index);
+void rules_reveal_cell(Board* board, int index);

@@ -1,5 +1,6 @@
 #include "game.h"
 
+#include "rules/reveal.h"
 #include "ui/layout.h"
 
 void game_init(Game* game) {
@@ -50,7 +51,7 @@ void game_update(Game* game, Action action) {
         return;
     }
 
-    board_reveal(&game->board, cell);
+    rules_reveal_cell(&game->board, cell);
     game->update = true;
 
     if (board_is_complete(&game->board)) {
