@@ -7,7 +7,7 @@
 #define CELL_COUNT (BOARD_SIZE * BOARD_SIZE)
 
 #define MINE 9
-#define LOST_MINE 10
+#define REVEALED_MINE 10
 
 #define MINE_COUNT 10
 
