@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdbool.h>
+
 #include "board/board.h"
 #include "input/input.h"
 
@@ -13,6 +15,7 @@ typedef enum {
 typedef struct {
     Board board;
     GameState state;
+    bool update;
 } Game;
 
 void game_init(Game* game);

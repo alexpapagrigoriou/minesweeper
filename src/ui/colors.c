@@ -18,5 +18,9 @@ void colors_init(void) {
     init_pair(8, COLOR_MAGENTA, COLOR_BLACK);
 
     init_pair(CP_MINE, COLOR_RED, COLOR_BLACK);
+
     init_pair(CP_EXIT, COLOR_WHITE, COLOR_RED);
+    init_pair(CP_BOX, COLOR_BLACK, COLOR_MAGENTA);
+    init_pair(CP_GRID, COLOR_WHITE, COLOR_BLACK);
+    init_pair(CP_CELL, COLOR_BLACK, COLOR_CYAN);
 }
