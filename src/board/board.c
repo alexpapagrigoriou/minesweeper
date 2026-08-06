@@ -19,6 +19,7 @@ void board_init(Board* board) {
             }
 
             board->cells[mine] = MINE;
+            board->mines |= 1 << mine;
 
             Position mine_pos = position_from_index(mine, BOARD_SIZE);
 
@@ -50,8 +51,12 @@ void board_init(Board* board) {
     }
 }
 
+bool board_is_complete(Board* board) {
+    return ~(board->revealed | board->mines) == 0;
+}
+
 bool board_has_mine(Board* board, int index) {
-    return board->cells[index] == MINE;
+    return board->mines & (1 << index);
 }
 
 bool board_is_revealed(Board* board, int index) {
