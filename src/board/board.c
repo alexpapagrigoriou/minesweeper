@@ -50,6 +50,10 @@ void board_init(Board* board) {
     }
 }
 
+bool board_has_mine(Board* board, int index) {
+    return board->cells[index] == MINE;
+}
+
 bool board_is_revealed(Board* board, int index) {
     return board->revealed & (1 << index);
 }

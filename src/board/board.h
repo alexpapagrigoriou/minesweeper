@@ -19,6 +19,7 @@ typedef struct {
 
 void board_init(Board* board);
 
+bool board_has_mine(Board* board, int index);
 bool board_is_revealed(Board* board, int index);
 bool board_is_flagged(Board* board, int index);
 
