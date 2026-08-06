@@ -5,8 +5,6 @@
 
 #include "../ui/layout.h"
 
-#define KEY_ESC 27
-
 static Action action_create(int row, int col, bool is_left_click) {
     Action action;
 
@@ -26,7 +24,7 @@ Action input_get(void) {
             return action_create(-1, 0, false);
         }
 
-        if (ch == KEY_ESC) {
+        if (ch == 'q') {
             return action_create(-1, -1, false);
         }
 
