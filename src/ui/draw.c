@@ -1,15 +1,22 @@
 #include "draw.h"
 
 #include <ncurses.h>
+#include <stdbool.h>
 #include <string.h>
 
 #include "colors.h"
 #include "layout.h"
 
-static void draw_text_centered(const char* msg, int color_pair, int attrs) {
+static bool draw_text_centered(const char* msg, int color_pair, int attrs) {
+    if ((int)strlen(msg) > get_term_cols()) {
+        return false;
+    }
+
     attron(COLOR_PAIR(color_pair) | attrs);
     mvaddstr(get_term_rows() / 2, (get_term_cols() - strlen(msg)) / 2, msg);
     attroff(COLOR_PAIR(color_pair) | attrs);
+
+    return true;
 }
 
 static void draw_text_centered_col(int row, const char* msg, int color_pair, int attrs) {
@@ -20,7 +27,13 @@ static void draw_text_centered_col(int row, const char* msg, int color_pair, int
 
 void draw_text_term_small_msg(void) {
     clear();
-    draw_text_centered("Terminal too small", CP_TERM_SMALL, A_BOLD);
+    if (!draw_text_centered("Terminal too small", CP_TERM_SMALL, A_BOLD)) {
+        int row = get_term_rows() / 2;
+
+        draw_text_centered_col(row - 1, "Terminal", CP_TERM_SMALL, A_BOLD);
+        draw_text_centered_col(row, "too", CP_TERM_SMALL, A_BOLD);
+        draw_text_centered_col(row + 1, "small", CP_TERM_SMALL, A_BOLD);
+    }
     refresh();
 }
 

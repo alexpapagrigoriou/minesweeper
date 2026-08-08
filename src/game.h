@@ -15,7 +15,7 @@ typedef enum {
 typedef struct {
     Board board;
     GameState state;
-    bool update;
+    bool render;
 } Game;
 
 void game_init(Game* game);

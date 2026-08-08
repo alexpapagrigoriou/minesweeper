@@ -6,15 +6,17 @@
 void game_init(Game* game) {
     board_init(&game->board);
     game->state = PLAYING;
-    game->update = true;
+    game->render = true;
 }
 
 void game_update(Game* game, Action action) {
-    game->update = false;
+    game->render = false;
 
     if (action.row == -1) {
         if (action.col == -1) {
             game->state = EXITED;
+        } else if (action.col == 0) {
+            game->render = true;
         }
 
         return;
@@ -37,7 +39,7 @@ void game_update(Game* game, Action action) {
 
     if (!action.is_left_click) {
         board_toggle_flag(&game->board, cell);
-        game->update = true;
+        game->render = true;
         return;
     }
 
@@ -52,7 +54,7 @@ void game_update(Game* game, Action action) {
     }
 
     rules_reveal_cell(&game->board, cell);
-    game->update = true;
+    game->render = true;
 
     if (board_is_complete(&game->board)) {
         game->board.revealed = game->board.mines;

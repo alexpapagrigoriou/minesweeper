@@ -30,7 +30,7 @@ static void render_board(Board* board) {
 }
 
 void render_game(Game* game) {
-    if (!game->update) {
+    if (!game->render) {
         return;
     }
 
@@ -48,7 +48,7 @@ void render_end(Game* game) {
         return;
     }
 
-    game->update = true;
+    game->render = true;
 
     render_game(game);
 
