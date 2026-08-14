@@ -8,7 +8,9 @@
 
 #define MINE 9
 #define REVEALED_MINE 10
+
 #define FLAG 11
+#define WRONG_FLAG 12
 
 #define MINE_COUNT 10
 

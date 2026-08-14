@@ -1,5 +1,7 @@
 #include "reveal.h"
 
+#include <stdbool.h>
+
 #include "../position.h"
 
 static void rules_flood_reveal(Board* board, int start) {
@@ -7,15 +9,17 @@ static void rules_flood_reveal(Board* board, int start) {
     int head = 0;
     int tail = 0;
 
+    bool visited[CELL_COUNT] = {false};
+
+    visited[start] = true;
     queue[tail++] = start;
 
     while (head < tail) {
         int index = queue[head++];
 
-        if (board_is_revealed(board, index) || board_is_flagged(board, index)) {
-            continue;
+        if (board_is_flagged(board, index)) {
+            board_toggle_flag(board, index);
         }
-
         board_reveal(board, index);
 
         if (board->cells[index] != 0) {
@@ -38,7 +42,10 @@ static void rules_flood_reveal(Board* board, int start) {
 
                 int neighbor = position_to_index(neighbor_pos, BOARD_SIZE);
 
-                queue[tail++] = neighbor;
+                if (!board_is_revealed(board, neighbor) && !visited[neighbor]) {
+                    visited[neighbor] = true;
+                    queue[tail++] = neighbor;
+                }
             }
         }
     }

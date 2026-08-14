@@ -15,6 +15,7 @@ char cell_symbol(uint8_t cell) {
         case REVEALED_MINE:
             return '*';
         case FLAG:
+        case WRONG_FLAG:
             return 'F';
     }
 
@@ -35,6 +36,8 @@ int cell_color(uint8_t cell) {
             return CP_REVEALED_MINE;
         case FLAG:
             return CP_FLAG;
+        case WRONG_FLAG:
+            return CP_WRONG_FLAG;
     }
 
     return 0;

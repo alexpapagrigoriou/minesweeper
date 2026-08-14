@@ -37,9 +37,13 @@ static void render_board(Board* board) {
                 int cell_row = board_start_row + 1 + row * CELL_WALL_SIZE;
                 int cell_col = board_start_col + 1 + col * CELL_WALL_SIZE;
 
-                attron(COLOR_PAIR(cell_color(FLAG)) | A_BOLD);
-                mvaddch(cell_row + 1, cell_col + 1, cell_symbol(FLAG));
-                attroff(COLOR_PAIR(cell_color(FLAG)) | A_BOLD);
+                int cell = board_is_revealed(board, index) ? WRONG_FLAG : FLAG;
+
+                draw_filled_box(cell_row, cell_col, CELL_SIZE, CELL_SIZE, cell_color(cell));
+
+                attron(COLOR_PAIR(cell_color(cell)) | A_BOLD);
+                mvaddch(cell_row + 1, cell_col + 1, cell_symbol(cell));
+                attroff(COLOR_PAIR(cell_color(cell)) | A_BOLD);
             } else if (board_is_revealed(board, index)) {
                 int cell_row = board_start_row + 1 + row * CELL_WALL_SIZE;
                 int cell_col = board_start_col + 1 + col * CELL_WALL_SIZE;

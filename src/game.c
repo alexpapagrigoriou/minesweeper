@@ -49,7 +49,8 @@ void game_update(Game* game, Action action) {
 
     if (board_has_mine(&game->board, cell)) {
         game->board.cells[cell] = REVEALED_MINE;
-        game->board.revealed |= game->board.mines;
+        game->board.revealed |= game->board.mines & ~game->board.flagged;
+        game->board.revealed |= game->board.flagged & ~game->board.mines;
         game->state = LOST;
         return;
     }
