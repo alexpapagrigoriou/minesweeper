@@ -12,7 +12,7 @@ static void rules_flood_reveal(Board* board, int start) {
     while (head < tail) {
         int index = queue[head++];
 
-        if (board_is_revealed(board, index || board_is_flagged(board, index))) {
+        if (board_is_revealed(board, index) || board_is_flagged(board, index)) {
             continue;
         }
 

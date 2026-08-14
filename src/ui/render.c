@@ -44,9 +44,9 @@ static void render_board(Board* board) {
                 int cell_row = board_start_row + 1 + row * CELL_WALL_SIZE;
                 int cell_col = board_start_col + 1 + col * CELL_WALL_SIZE;
 
-                draw_filled_box(cell_row, cell_col, CELL_SIZE, CELL_SIZE, CP_REVEALED);
-
                 uint8_t cell = board->cells[index];
+
+                draw_filled_box(cell_row, cell_col, CELL_SIZE, CELL_SIZE, cell_color(cell));
 
                 attron(COLOR_PAIR(cell_color(cell)) | A_BOLD);
                 mvaddch(cell_row + 1, cell_col + 1, cell_symbol(cell));
@@ -54,6 +54,19 @@ static void render_board(Board* board) {
             }
         }
     }
+
+    // TODO: remove after debug
+    int row = 0;
+    int col = 0;
+    for (int i = 0; i < 64; i++) {
+        if (i && i % 8 == 0) {
+            row++;
+            col = 0;
+        }
+
+        mvprintw(row, col++, "%u", board->cells[i]);
+    }
+    // TODO: remove after debug
 }
 
 void render_game(Game* game) {
