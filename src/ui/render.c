@@ -59,18 +59,28 @@ static void render_board(Board* board) {
         }
     }
 
-    // TODO: remove after debug
+#ifdef DEBUG
     int row = 0;
     int col = 0;
-    for (int i = 0; i < 64; i++) {
-        if (i && i % 8 == 0) {
+    for (int i = 0; i < BOARD_SIZE * BOARD_SIZE; i++) {
+        if (i && i % BOARD_SIZE == 0) {
             row++;
             col = 0;
         }
 
-        mvprintw(row, col++, "%u", board->cells[i]);
+        uint8_t cell = board->cells[i];
+
+        if (cell == 0) {
+            mvaddch(row * 2, col * 2, '0');
+        } else {
+            attron(COLOR_PAIR(cell_color(cell)) | A_BOLD);
+            mvaddch(row * 2, col * 2, cell_symbol(cell));
+            attroff(COLOR_PAIR(cell_color(cell)) | A_BOLD);
+        }
+
+        col++;
     }
-    // TODO: remove after debug
+#endif
 }
 
 void render_game(Game* game) {
