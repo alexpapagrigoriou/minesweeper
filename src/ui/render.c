@@ -2,6 +2,7 @@
 
 #include <ncurses.h>
 
+#include "../position.h"
 #include "colors.h"
 #include "draw.h"
 #include "layout.h"
@@ -19,15 +20,31 @@ static void render_exit(void) {
 }
 
 static void render_board(Board* board) {
-    int row = get_board_start_row();
-    int col = get_board_start_col();
+    int board_start_row = get_board_start_row();
+    int board_start_col = get_board_start_col();
 
-    draw_filled_box(row + 1, col + 1, BOARD_ROWS - 2, BOARD_COLS - 2, CP_CELL);
+    draw_filled_box(board_start_row + 1, board_start_col + 1, BOARD_ROWS - 2, BOARD_COLS - 2, CP_CELL);
 
-    draw_grid(row, col, BOARD_ROWS, BOARD_COLS, CELL_WALL_SIZE, CP_GRID);
+    draw_grid(board_start_row, board_start_col, BOARD_ROWS, BOARD_COLS, CELL_WALL_SIZE, CP_GRID);
 
-    // TODO: render cells
-    (void)board;
+    for (int row = 0; row < BOARD_SIZE; row++) {
+        for (int col = 0; col < BOARD_SIZE; col++) {
+            int index = position_to_index(position_create(row, col), BOARD_SIZE);
+
+            if (board_is_flagged(board, index)) {
+                int cell_row = board_start_row + 1 + row * CELL_WALL_SIZE;
+                int cell_col = board_start_col + 1 + col * CELL_WALL_SIZE;
+
+                attron(COLOR_PAIR(CP_FLAGGED) | A_BOLD);
+                mvaddch(cell_row + 1, cell_col + 1, 'F');
+                attroff(COLOR_PAIR(CP_FLAGGED) | A_BOLD);
+            }
+
+            if (board_is_revealed(board, index)) {
+                // TODO: draw revealed cells
+            }
+        }
+    }
 }
 
 void render_game(Game* game) {

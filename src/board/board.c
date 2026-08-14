@@ -19,7 +19,7 @@ void board_init(Board* board) {
             }
 
             board->cells[mine] = MINE;
-            board->mines |= 1 << mine;
+            board->mines |= UINT64_C(1) << mine;
 
             Position mine_pos = position_from_index(mine, BOARD_SIZE);
 
@@ -55,21 +55,21 @@ bool board_is_complete(Board* board) {
 }
 
 bool board_has_mine(Board* board, int index) {
-    return board->mines & (1 << index);
+    return board->mines & (UINT64_C(1) << index);
 }
 
 bool board_is_revealed(Board* board, int index) {
-    return board->revealed & (1 << index);
+    return board->revealed & (UINT64_C(1) << index);
 }
 
 bool board_is_flagged(Board* board, int index) {
-    return board->flags & (1 << index);
+    return board->flags & (UINT64_C(1) << index);
 }
 
 void board_reveal(Board* board, int index) {
-    board->revealed |= 1 << index;
+    board->revealed |= UINT64_C(1) << index;
 }
 
 void board_toggle_flag(Board* board, int index) {
-    board->flags ^= 1 << index;
+    board->flags ^= UINT64_C(1) << index;
 }

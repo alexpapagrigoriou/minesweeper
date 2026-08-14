@@ -21,7 +21,7 @@ void colors_init(void) {
     init_pair(CP_REVEALED_MINE, COLOR_BLACK, COLOR_RED);
 
     init_pair(CP_REVEALED, COLOR_BLACK, COLOR_BLACK);
-    init_pair(CP_FLAGGED, COLOR_RED, COLOR_BLACK);
+    init_pair(CP_FLAGGED, COLOR_RED, COLOR_CYAN);
 
     init_pair(CP_EXIT, COLOR_WHITE, COLOR_RED);
     init_pair(CP_BOX, COLOR_BLACK, COLOR_MAGENTA);
