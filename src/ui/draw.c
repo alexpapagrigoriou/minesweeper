@@ -45,6 +45,10 @@ void draw_text_lost_msg(void) {
     draw_text_centered_col(get_win_start_row(), " You lost! ", CP_LOST, A_BOLD);
 }
 
+void draw_text_press_any_key(void) {
+    draw_text_centered_col(get_win_start_row() + WIN_ROWS - 1, " Press any key to exit... ", CP_PRESS_ANY_KEY, A_BOLD);
+}
+
 void draw_box(int row, int col, int rows, int cols, int color_pair) {
     attron(COLOR_PAIR(color_pair));
 

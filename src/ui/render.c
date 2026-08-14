@@ -112,6 +112,8 @@ void render_end(Game* game) {
         draw_text_lost_msg();
     }
 
+    draw_text_press_any_key();
+
     refresh();
 
     getch();
