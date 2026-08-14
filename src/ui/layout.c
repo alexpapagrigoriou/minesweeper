@@ -2,6 +2,7 @@
 
 #include <ncurses.h>
 
+#include "../position.h"
 #include "draw.h"
 
 static int term_rows, term_cols;
@@ -81,10 +82,20 @@ bool layout_is_exit(int row, int col) {
 }
 
 int layout_get_board_cell(int row, int col) {
-    // TODO: return the index of the cell in the board
-    //       return -1 if the cell is not in the board
-    (void)row;
-    (void)col;
+    if (row < board_start_row + 1 || row > board_start_row + BOARD_ROWS - 2 ||
+        col < board_start_col + 1 || col > board_start_col + BOARD_COLS - 2) {
+        return -1;
+    }
 
-    return -1;
+    row -= board_start_row;
+    col -= board_start_col;
+
+    if (row % CELL_WALL_SIZE == 0 || col % CELL_WALL_SIZE == 0) {
+        return -1;
+    }
+
+    int board_row = row / CELL_WALL_SIZE;
+    int board_col = col / CELL_WALL_SIZE;
+
+    return position_to_index(position_create(board_row, board_col), BOARD_SIZE);
 }
