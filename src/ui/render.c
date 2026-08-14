@@ -26,6 +26,7 @@ static void render_board(Board* board) {
 
     draw_grid(row, col, BOARD_ROWS, BOARD_COLS, CELL_WALL_SIZE, CP_GRID);
 
+    // TODO: render cells
     (void)board;
 }
 
