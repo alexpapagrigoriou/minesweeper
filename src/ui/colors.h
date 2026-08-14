@@ -2,9 +2,9 @@
 
 #define CP_MINE 9
 #define CP_REVEALED_MINE 10
+#define CP_FLAG 11
 
-#define CP_REVEALED 11
-#define CP_FLAGGED 12
+#define CP_REVEALED 12
 
 #define CP_BKGD 13
 

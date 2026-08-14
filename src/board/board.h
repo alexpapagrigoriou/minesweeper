@@ -8,6 +8,7 @@
 
 #define MINE 9
 #define REVEALED_MINE 10
+#define FLAG 11
 
 #define MINE_COUNT 10
 
@@ -16,7 +17,7 @@ typedef struct {
 
     uint64_t mines;
     uint64_t revealed;
-    uint64_t flags;
+    uint64_t flagged;
 } Board;
 
 void board_init(Board* board);

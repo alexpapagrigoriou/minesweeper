@@ -63,7 +63,7 @@ bool board_is_revealed(Board* board, int index) {
 }
 
 bool board_is_flagged(Board* board, int index) {
-    return board->flags & (UINT64_C(1) << index);
+    return board->flagged & (UINT64_C(1) << index);
 }
 
 void board_reveal(Board* board, int index) {
@@ -71,5 +71,5 @@ void board_reveal(Board* board, int index) {
 }
 
 void board_toggle_flag(Board* board, int index) {
-    board->flags ^= UINT64_C(1) << index;
+    board->flagged ^= UINT64_C(1) << index;
 }

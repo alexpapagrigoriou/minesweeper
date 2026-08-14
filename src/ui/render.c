@@ -1,7 +1,9 @@
 #include "render.h"
 
 #include <ncurses.h>
+#include <stdint.h>
 
+#include "../cells/cell.h"
 #include "../position.h"
 #include "colors.h"
 #include "draw.h"
@@ -35,13 +37,20 @@ static void render_board(Board* board) {
                 int cell_row = board_start_row + 1 + row * CELL_WALL_SIZE;
                 int cell_col = board_start_col + 1 + col * CELL_WALL_SIZE;
 
-                attron(COLOR_PAIR(CP_FLAGGED) | A_BOLD);
-                mvaddch(cell_row + 1, cell_col + 1, 'F');
-                attroff(COLOR_PAIR(CP_FLAGGED) | A_BOLD);
-            }
+                attron(COLOR_PAIR(cell_color(FLAG)) | A_BOLD);
+                mvaddch(cell_row + 1, cell_col + 1, cell_symbol(FLAG));
+                attroff(COLOR_PAIR(cell_color(FLAG)) | A_BOLD);
+            } else if (board_is_revealed(board, index)) {
+                int cell_row = board_start_row + 1 + row * CELL_WALL_SIZE;
+                int cell_col = board_start_col + 1 + col * CELL_WALL_SIZE;
 
-            if (board_is_revealed(board, index)) {
-                // TODO: draw revealed cells
+                draw_filled_box(cell_row, cell_col, CELL_SIZE, CELL_SIZE, CP_REVEALED);
+
+                uint8_t cell = board->cells[index];
+
+                attron(COLOR_PAIR(cell_color(cell)) | A_BOLD);
+                mvaddch(cell_row + 1, cell_col + 1, cell_symbol(cell));
+                attroff(COLOR_PAIR(cell_color(cell)) | A_BOLD);
             }
         }
     }
