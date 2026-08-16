@@ -1,7 +1,7 @@
 #include "cell.h"
 
+#include "../../ui/colors.h"
 #include "../board/board.h"
-#include "../ui/colors.h"
 
 char cell_symbol(uint8_t cell) {
     if (cell >= 1 && cell <= 8) {

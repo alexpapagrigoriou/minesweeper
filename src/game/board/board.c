@@ -2,8 +2,8 @@
 
 #include <string.h>
 
-#include "../position.h"
-#include "../util/random.h"
+#include "../../util/position.h"
+#include "../../util/random.h"
 
 void board_init(Board* board) {
     memset(board, 0, sizeof(*board));

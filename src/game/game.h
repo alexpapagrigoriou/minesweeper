@@ -1,15 +1,13 @@
 #pragma once
 
-#include <stdbool.h>
-
+#include "../app_state.h"
 #include "board/board.h"
-#include "input/input.h"
 
 typedef enum {
-    PLAYING,
-    WON,
-    LOST,
-    EXITED
+    GAME_RUNNING,
+    GAME_WON,
+    GAME_LOST,
+    GAME_EXIT
 } GameState;
 
 typedef struct {
@@ -19,5 +17,4 @@ typedef struct {
 } Game;
 
 void game_init(Game* game);
-
-void game_update(Game* game, Action action);
+AppState game_run(void);

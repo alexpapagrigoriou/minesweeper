@@ -2,7 +2,7 @@
 
 #include <stdbool.h>
 
-#include "../position.h"
+#include "../../util/position.h"
 
 static void rules_flood_reveal(Board* board, int start) {
     int queue[CELL_COUNT];

@@ -2,113 +2,75 @@
 
 #include <ncurses.h>
 #include <stdint.h>
+#include <string.h>
 
-#include "../cells/cell.h"
-#include "../position.h"
 #include "colors.h"
-#include "draw.h"
 #include "layout.h"
 
-static void render_window(void) {
+void render_window(void) {
     clear();
-    draw_filled_box(get_win_start_row(), get_win_start_col(), WIN_ROWS, WIN_COLS, CP_BOX);
+    render_filled_box(get_win_start_row(), get_win_start_col(), WIN_ROWS, WIN_COLS, CP_BOX);
     refresh();
 }
 
-static void render_exit(void) {
-    attron(COLOR_PAIR(CP_EXIT) | A_BOLD);
-    mvaddstr(get_exit_start_row(), get_exit_start_col(), "  X  ");
-    attroff(COLOR_PAIR(CP_EXIT) | A_BOLD);
+void render_text(int row, int col, const char* msg, int color_pair, int attrs) {
+    attron(COLOR_PAIR(color_pair) | attrs);
+    mvaddstr(row, col, msg);
+    attroff(COLOR_PAIR(color_pair) | attrs);
 }
 
-static void render_board(Board* board) {
-    int board_start_row = get_board_start_row();
-    int board_start_col = get_board_start_col();
+void render_text_centered(const char* msg, int color_pair, int attrs) {
+    render_text(get_term_rows() / 2, (get_term_cols() - strlen(msg)) / 2, msg, color_pair, attrs);
+}
 
-    draw_filled_box(board_start_row + 1, board_start_col + 1, BOARD_ROWS - 2, BOARD_COLS - 2, CP_CELL);
+void render_text_centered_col(int row, const char* msg, int color_pair, int attrs) {
+    render_text(row, (get_term_cols() - strlen(msg)) / 2, msg, color_pair, attrs);
+}
 
-    draw_grid(board_start_row, board_start_col, BOARD_ROWS, BOARD_COLS, CELL_WALL_SIZE, CP_GRID);
+void render_box(int row, int col, int rows, int cols, int color_pair) {
+    attron(COLOR_PAIR(color_pair));
 
-    for (int row = 0; row < BOARD_SIZE; row++) {
-        for (int col = 0; col < BOARD_SIZE; col++) {
-            int index = position_to_index(position_create(row, col), BOARD_SIZE);
+    mvhline(row, col, ' ', cols);
+    mvvline(row, col, ' ', rows);
+    mvhline(row + rows - 1, col, ' ', cols);
+    mvvline(row, col + cols - 1, ' ', rows);
 
-            if (board_is_flagged(board, index)) {
-                int cell_row = board_start_row + 1 + row * CELL_WALL_SIZE;
-                int cell_col = board_start_col + 1 + col * CELL_WALL_SIZE;
+    attroff(COLOR_PAIR(color_pair));
+}
 
-                int cell = board_is_revealed(board, index) ? WRONG_FLAG : FLAG;
+void render_filled_box(int row, int col, int rows, int cols, int color_pair) {
+    attron(COLOR_PAIR(color_pair));
 
-                draw_filled_box(cell_row, cell_col, CELL_SIZE, CELL_SIZE, cell_color(cell));
+    for (int i = 0; i < rows; i++) {
+        mvhline(row + i, col, ' ', cols);
+    }
 
-                attron(COLOR_PAIR(cell_color(cell)) | A_BOLD);
-                mvaddch(cell_row + 1, cell_col + 1, cell_symbol(cell));
-                attroff(COLOR_PAIR(cell_color(cell)) | A_BOLD);
-            } else if (board_is_revealed(board, index)) {
-                int cell_row = board_start_row + 1 + row * CELL_WALL_SIZE;
-                int cell_col = board_start_col + 1 + col * CELL_WALL_SIZE;
+    attroff(COLOR_PAIR(color_pair));
+}
 
-                uint8_t cell = board->cells[index];
+void render_grid(int row, int col, int rows, int cols, int spacing, int color_pair) {
+    attron(COLOR_PAIR(color_pair));
 
-                draw_filled_box(cell_row, cell_col, CELL_SIZE, CELL_SIZE, cell_color(cell));
+    for (int i = 0; i < rows; i += spacing) {
+        mvhline(row + i, col, ACS_HLINE, cols);
+        mvvline(row, col + i, ACS_VLINE, cols);
+    }
 
-                attron(COLOR_PAIR(cell_color(cell)) | A_BOLD);
-                mvaddch(cell_row + 1, cell_col + 1, cell_symbol(cell));
-                attroff(COLOR_PAIR(cell_color(cell)) | A_BOLD);
-            }
+    mvaddch(row, col, ACS_ULCORNER);
+    mvaddch(row, col + cols - 1, ACS_URCORNER);
+    mvaddch(row + rows - 1, col, ACS_LLCORNER);
+    mvaddch(row + rows - 1, col + cols - 1, ACS_LRCORNER);
+
+    for (int i = spacing; i < rows - spacing; i += spacing) {
+        mvaddch(row, col + i, ACS_TTEE);
+        mvaddch(row + i, col, ACS_LTEE);
+        mvaddch(row + rows - 1, col + i, ACS_BTEE);
+        mvaddch(row + i, col + cols - 1, ACS_RTEE);
+
+        for (int j = spacing; j < cols - spacing; j += spacing) {
+            mvaddch(row + i, col + j, ACS_PLUS);
         }
     }
 
-#ifdef DEBUG
-    int row = 0;
-    int col = 0;
-    for (int i = 0; i < BOARD_SIZE * BOARD_SIZE; i++) {
-        if (i && i % BOARD_SIZE == 0) {
-            row++;
-            col = 0;
-        }
-
-        uint8_t cell = board->cells[i];
-
-        if (cell == 0) {
-            mvaddch(row * 2, col * 2, '0');
-        } else {
-            attron(COLOR_PAIR(cell_color(cell)) | A_BOLD);
-            mvaddch(row * 2, col * 2, cell_symbol(cell));
-            attroff(COLOR_PAIR(cell_color(cell)) | A_BOLD);
-        }
-
-        col++;
-    }
-#endif
-}
-
-void render_game(Game* game) {
-    if (!game->render) {
-        return;
-    }
-
-    clear();
-
-    render_window();
-    render_exit();
-    render_board(&game->board);
-
-    refresh();
-}
-
-void render_end(Game* game) {
-    if (game->state == EXITED) {
-        return;
-    }
-
-    game->render = true;
-
-    render_game(game);
-    draw_text_state_msg(game->state == WON);
-    draw_text_play_again();
-
-    refresh();
-
-    getch();
+    attroff(COLOR_PAIR(color_pair));
 }

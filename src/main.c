@@ -1,6 +1,11 @@
-#include "minesweeper.h"
+#include "app.h"
 
 int main(void) {
-    minesweeper_run();
+    App app;
+
+    app_init(&app);
+    app_run(&app);
+    app_cleanup();
+
     return 0;
 }

@@ -1,20 +1,14 @@
-#include "game.h"
+#include "game_update.h"
 
+#include "../ui/game_layout.h"
 #include "rules/reveal.h"
-#include "ui/layout.h"
-
-void game_init(Game* game) {
-    board_init(&game->board);
-    game->state = PLAYING;
-    game->render = true;
-}
 
 void game_update(Game* game, Action action) {
     game->render = false;
 
     if (action.row == -1) {
         if (action.col == -1) {
-            game->state = EXITED;
+            game->state = GAME_EXIT;
         } else if (action.col == 0) {
             game->render = true;
         }
@@ -22,12 +16,21 @@ void game_update(Game* game, Action action) {
         return;
     }
 
-    if (action.is_left_click && layout_is_exit(action.row, action.col)) {
-        game->state = EXITED;
+    if (action.is_left_click && game_layout_is_exit(action.row, action.col)) {
+        game->state = GAME_EXIT;
         return;
     }
 
-    int cell = layout_get_board_cell(action.row, action.col);
+    if (game->state != GAME_RUNNING) {
+        if (game_layout_is_play_again(action.row, action.col)) {
+            game_init(game);
+            game->render = true;
+        }
+
+        return;
+    }
+
+    int cell = game_layout_get_board_cell(action.row, action.col);
 
     if (cell == -1) {
         return;
@@ -51,7 +54,8 @@ void game_update(Game* game, Action action) {
         game->board.cells[cell] = REVEALED_MINE;
         game->board.revealed |= game->board.mines & ~game->board.flagged;
         game->board.revealed |= game->board.flagged & ~game->board.mines;
-        game->state = LOST;
+        game->state = GAME_LOST;
+        game->render = true;
         return;
     }
 
@@ -60,6 +64,6 @@ void game_update(Game* game, Action action) {
 
     if (board_is_complete(&game->board)) {
         game->board.flagged = game->board.mines;
-        game->state = WON;
+        game->state = GAME_WON;
     }
 }
