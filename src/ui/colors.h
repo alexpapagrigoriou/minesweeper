@@ -18,6 +18,6 @@
 #define CP_TERM_SMALL 19
 #define CP_WON 20
 #define CP_LOST 21
-#define CP_PRESS_ANY_KEY 22
+#define CP_PLAY_AGAIN 22
 
 void colors_init(void);

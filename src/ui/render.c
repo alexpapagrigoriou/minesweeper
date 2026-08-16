@@ -105,14 +105,8 @@ void render_end(Game* game) {
     game->render = true;
 
     render_game(game);
-
-    if (game->state == WON) {
-        draw_text_won_msg();
-    } else if (game->state == LOST) {
-        draw_text_lost_msg();
-    }
-
-    draw_text_press_any_key();
+    draw_text_state_msg(game->state == WON);
+    draw_text_play_again();
 
     refresh();
 

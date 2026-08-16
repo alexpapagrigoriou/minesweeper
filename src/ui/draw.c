@@ -1,7 +1,6 @@
 #include "draw.h"
 
 #include <ncurses.h>
-#include <stdbool.h>
 #include <string.h>
 
 #include "colors.h"
@@ -37,16 +36,16 @@ void draw_text_term_small_msg(void) {
     refresh();
 }
 
-void draw_text_won_msg(void) {
-    draw_text_centered_col(get_win_start_row(), " You won! ", CP_WON, A_BOLD);
+void draw_text_state_msg(bool won) {
+    if (won) {
+        draw_text_centered_col(get_win_start_row() + 1, " Victory! ", CP_WON, A_BOLD);
+    } else {
+        draw_text_centered_col(get_win_start_row() + 1, " Game Over! ", CP_LOST, A_BOLD);
+    }
 }
 
-void draw_text_lost_msg(void) {
-    draw_text_centered_col(get_win_start_row(), " You lost! ", CP_LOST, A_BOLD);
-}
-
-void draw_text_press_any_key(void) {
-    draw_text_centered_col(get_win_start_row() + WIN_ROWS - 1, " Press any key to exit... ", CP_PRESS_ANY_KEY, A_BOLD);
+void draw_text_play_again(void) {
+    draw_text_centered_col(get_win_start_row() + WIN_ROWS - 2, " Play Again ", CP_PLAY_AGAIN, A_BOLD);
 }
 
 void draw_box(int row, int col, int rows, int cols, int color_pair) {

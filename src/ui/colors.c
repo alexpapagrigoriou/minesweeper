@@ -33,5 +33,5 @@ void colors_init(void) {
     init_pair(CP_TERM_SMALL, COLOR_RED, COLOR_BLACK);
     init_pair(CP_WON, COLOR_GREEN, COLOR_BLACK);
     init_pair(CP_LOST, COLOR_RED, COLOR_BLACK);
-    init_pair(CP_PRESS_ANY_KEY, COLOR_YELLOW, COLOR_BLACK);
+    init_pair(CP_PLAY_AGAIN, COLOR_BLACK, COLOR_GREEN);
 }
