@@ -4,6 +4,7 @@
 
 #include "../ui/colors.h"
 #include "../ui/game_layout.h"
+#include "../ui/layout.h"
 #include "../ui/render.h"
 #include "../util/position.h"
 #include "cells/cell.h"
@@ -53,10 +54,13 @@ static void render_board(Board* board) {
     }
 
 #ifdef DEBUG
+    int debug_start_row = get_win_start_row() + 10;
+    int debug_start_col = get_win_start_col() + WIN_COLS + 1;
+
     int row = 0;
     int col = 0;
 
-    mvaddstr(row, col, " [DEBUG ONLY]");
+    mvaddstr(debug_start_row + row, debug_start_col + col, " [DEBUG ONLY]");
 
     row++;
 
@@ -69,10 +73,10 @@ static void render_board(Board* board) {
         uint8_t cell = board->cells[i];
 
         if (cell == 0) {
-            mvaddch(row * 2, col * 2, '0');
+            mvaddch(debug_start_row + row * 2, debug_start_col + col * 2, '0');
         } else {
             attron(COLOR_PAIR(cell_color(cell)) | A_BOLD);
-            mvaddch(row * 2, col * 2, cell_symbol(cell));
+            mvaddch(debug_start_row + row * 2, debug_start_col + col * 2, cell_symbol(cell));
             attroff(COLOR_PAIR(cell_color(cell)) | A_BOLD);
         }
 
