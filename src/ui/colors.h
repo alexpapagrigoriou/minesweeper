@@ -1,23 +1,25 @@
 #pragma once
 
-#define CP_MINE 9
-#define CP_REVEALED_MINE 10
+enum {
+    CP_MINE = 9,
+    CP_REVEALED_MINE,
 
-#define CP_FLAG 11
-#define CP_WRONG_FLAG 12
+    CP_FLAG,
+    CP_WRONG_FLAG,
 
-#define CP_REVEALED 13
+    CP_REVEALED,
 
-#define CP_BKGD 14
+    CP_BKGD,
 
-#define CP_EXIT 15
-#define CP_BOX 16
-#define CP_GRID 17
-#define CP_CELL 18
+    CP_EXIT,
+    CP_BOX,
+    CP_GRID,
+    CP_CELL,
 
-#define CP_TERM_SMALL 19
-#define CP_WON 20
-#define CP_LOST 21
-#define CP_PLAY_AGAIN 22
+    CP_TERM_SMALL,
+    CP_WON,
+    CP_LOST,
+    CP_PLAY_AGAIN
+};
 
 void colors_init(void);
