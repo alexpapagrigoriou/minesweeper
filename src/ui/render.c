@@ -9,10 +9,10 @@
 
 void render_window(void) {
     clear();
-    render_filled_box(get_win_start_row(), get_win_start_col(), WIN_ROWS, WIN_COLS, CP_BOX);
+    render_filled_box(win_start_row, win_start_col, WIN_ROWS, WIN_COLS, CP_BOX);
 
 #ifdef DEBUG
-    render_text(get_win_start_row(), get_win_start_col(), "[DEBUG MODE]", CP_BOX, A_BOLD);
+    render_text(win_start_row, win_start_col, "[DEBUG MODE]", CP_BOX, A_BOLD);
 #endif
 
     refresh();
@@ -25,11 +25,11 @@ void render_text(int row, int col, const char* msg, int color_pair, int attrs) {
 }
 
 void render_text_centered(const char* msg, int color_pair, int attrs) {
-    render_text(get_term_rows() / 2, (get_term_cols() - strlen(msg)) / 2, msg, color_pair, attrs);
+    render_text(term_rows / 2, (term_cols - strlen(msg)) / 2, msg, color_pair, attrs);
 }
 
 void render_text_centered_col(int row, const char* msg, int color_pair, int attrs) {
-    render_text(row, (get_term_cols() - strlen(msg)) / 2, msg, color_pair, attrs);
+    render_text(row, (term_cols - strlen(msg)) / 2, msg, color_pair, attrs);
 }
 
 void render_box(int row, int col, int rows, int cols, int color_pair) {

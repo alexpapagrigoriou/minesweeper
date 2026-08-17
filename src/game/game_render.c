@@ -11,14 +11,11 @@
 
 static void render_exit(void) {
     attron(COLOR_PAIR(CP_EXIT) | A_BOLD);
-    mvaddstr(get_exit_start_row(), get_exit_start_col(), "  X  ");
+    mvaddstr(exit_start_row, exit_start_col, "  X  ");
     attroff(COLOR_PAIR(CP_EXIT) | A_BOLD);
 }
 
 static void render_board(Board* board) {
-    int board_start_row = get_board_start_row();
-    int board_start_col = get_board_start_col();
-
     render_filled_box(board_start_row + 1, board_start_col + 1, BOARD_ROWS - 2, BOARD_COLS - 2, CP_CELL);
 
     render_grid(board_start_row, board_start_col, BOARD_ROWS, BOARD_COLS, CELL_WALL_SIZE, CP_GRID);
@@ -54,8 +51,8 @@ static void render_board(Board* board) {
     }
 
 #ifdef DEBUG
-    int debug_start_row = get_win_start_row() + 10;
-    int debug_start_col = get_win_start_col() + WIN_COLS + 1;
+    int debug_start_row = win_start_row + 10;
+    int debug_start_col = win_start_col + WIN_COLS + 1;
 
     int row = 0;
     int col = 0;
@@ -87,14 +84,14 @@ static void render_board(Board* board) {
 
 static void render_won_lost(bool won) {
     if (won) {
-        render_text_centered_col(get_board_start_row() - 1, " Victory! ", CP_WON, A_BOLD);
+        render_text_centered_col(board_start_row - 1, " Victory! ", CP_WON, A_BOLD);
     } else {
-        render_text_centered_col(get_board_start_row() - 1, " Game Over! ", CP_LOST, A_BOLD);
+        render_text_centered_col(board_start_row - 1, " Game Over! ", CP_LOST, A_BOLD);
     }
 }
 
 static void render_play_again(void) {
-    render_text(get_play_again_start_row(), get_play_again_start_col(), " Play Again ", CP_PLAY_AGAIN, A_BOLD);
+    render_text(play_again_start_row, play_again_start_col, " Play Again ", CP_PLAY_AGAIN, A_BOLD);
 }
 
 void game_render(Game* game) {

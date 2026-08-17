@@ -17,16 +17,11 @@
 #define PLAY_AGAIN_ROWS 1
 #define PLAY_AGAIN_COLS 12
 
+extern int exit_start_row, exit_start_col;
+extern int board_start_row, board_start_col;
+extern int play_again_start_row, play_again_start_col;
+
 void game_layout_update(void);
-
-int get_exit_start_row(void);
-int get_exit_start_col(void);
-
-int get_board_start_row(void);
-int get_board_start_col(void);
-
-int get_play_again_start_row(void);
-int get_play_again_start_col(void);
 
 bool game_layout_is_exit(int row, int col);
 int game_layout_get_board_cell(int row, int col);
