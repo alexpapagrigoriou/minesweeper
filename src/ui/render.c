@@ -10,6 +10,11 @@
 void render_window(void) {
     clear();
     render_filled_box(get_win_start_row(), get_win_start_col(), WIN_ROWS, WIN_COLS, CP_BOX);
+
+#ifdef DEBUG
+    render_text(get_win_start_row(), get_win_start_col(), "[DEBUG MODE]", CP_BOX, A_BOLD);
+#endif
+
     refresh();
 }
 
