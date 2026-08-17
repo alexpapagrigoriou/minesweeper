@@ -55,6 +55,11 @@ static void render_board(Board* board) {
 #ifdef DEBUG
     int row = 0;
     int col = 0;
+
+    mvaddstr(row, col, " [DEBUG ONLY]");
+
+    row++;
+
     for (int i = 0; i < BOARD_SIZE * BOARD_SIZE; i++) {
         if (i && i % BOARD_SIZE == 0) {
             row++;
