@@ -5,6 +5,7 @@
 #include "game/game.h"
 #include "ui/colors.h"
 #include "ui/layout.h"
+#include "util/sound.h"
 
 void app_init(App* app) {
     initscr();
@@ -15,8 +16,8 @@ void app_init(App* app) {
     curs_set(FALSE);
 
     colors_init();
-
     layout_update();
+    sound_init();
 
     // TODO: Change to APP_MENU when menu is implemented
     app->state = APP_GAME;

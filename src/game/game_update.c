@@ -1,7 +1,24 @@
 #include "game_update.h"
 
 #include "../ui/game_layout.h"
+#include "../util/sound.h"
 #include "rules/reveal.h"
+
+static void game_won(Game* game) {
+    game->board.flagged = game->board.mines;
+    game->state = GAME_WON;
+
+    sound_play(SOUND_WIN);
+}
+
+static void game_lost(Game* game) {
+    game->board.revealed |= game->board.mines & ~game->board.flagged;
+    game->board.revealed |= game->board.flagged & ~game->board.mines;
+    game->state = GAME_LOST;
+    game->render = true;
+
+    sound_play(SOUND_LOSE);
+}
 
 void game_update(Game* game, Action action) {
     game->render = false;
@@ -43,6 +60,8 @@ void game_update(Game* game, Action action) {
     if (!action.is_left_click) {
         board_toggle_flag(&game->board, cell);
         game->render = true;
+
+        sound_play(SOUND_TICK);
         return;
     }
 
@@ -52,18 +71,18 @@ void game_update(Game* game, Action action) {
 
     if (board_has_mine(&game->board, cell)) {
         game->board.cells[cell] = REVEALED_MINE;
-        game->board.revealed |= game->board.mines & ~game->board.flagged;
-        game->board.revealed |= game->board.flagged & ~game->board.mines;
-        game->state = GAME_LOST;
-        game->render = true;
+
+        game_lost(game);
         return;
     }
 
     rules_reveal_cell(&game->board, cell);
     game->render = true;
 
-    if (board_is_complete(&game->board)) {
-        game->board.flagged = game->board.mines;
-        game->state = GAME_WON;
+    if (!board_is_complete(&game->board)) {
+        sound_play(SOUND_TICK);
+        return;
     }
+
+    game_won(game);
 }
