@@ -29,6 +29,6 @@ void sound_play(Sound sound) {
     }
 
     char command[64];
-    snprintf(command, sizeof(command), "paplay assets/audio/%s.wav >/dev/null 2>&1 &", file);
+    snprintf(command, sizeof(command), "paplay assets/sounds/%s.wav >/dev/null 2>&1 &", file);
     system(command);
 }
