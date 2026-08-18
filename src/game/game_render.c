@@ -15,6 +15,39 @@ static void render_exit(void) {
     attroff(COLOR_PAIR(CP_EXIT) | A_BOLD);
 }
 
+#ifdef DEBUG
+static void render_answer(Board* board) {
+    int debug_start_row = win_start_row + 10;
+    int debug_start_col = win_start_col + WIN_COLS + 1;
+
+    int row = 0;
+    int col = 0;
+
+    mvaddstr(debug_start_row + row, debug_start_col + col, " [DEBUG ONLY]");
+
+    row++;
+
+    for (int i = 0; i < BOARD_SIZE * BOARD_SIZE; i++) {
+        if (i && i % BOARD_SIZE == 0) {
+            row++;
+            col = 0;
+        }
+
+        uint8_t cell = board->cells[i];
+
+        if (cell == 0) {
+            mvaddch(debug_start_row + row * 2, debug_start_col + col * 2, '0');
+        } else {
+            attron(COLOR_PAIR(cell_color(cell)) | A_BOLD);
+            mvaddch(debug_start_row + row * 2, debug_start_col + col * 2, cell_symbol(cell));
+            attroff(COLOR_PAIR(cell_color(cell)) | A_BOLD);
+        }
+
+        col++;
+    }
+}
+#endif
+
 static void render_board(Board* board) {
     render_filled_box(board_start_row + 1, board_start_col + 1, BOARD_ROWS - 2, BOARD_COLS - 2, CP_CELL);
 
@@ -49,37 +82,6 @@ static void render_board(Board* board) {
             }
         }
     }
-
-#ifdef DEBUG
-    int debug_start_row = win_start_row + 10;
-    int debug_start_col = win_start_col + WIN_COLS + 1;
-
-    int row = 0;
-    int col = 0;
-
-    mvaddstr(debug_start_row + row, debug_start_col + col, " [DEBUG ONLY]");
-
-    row++;
-
-    for (int i = 0; i < BOARD_SIZE * BOARD_SIZE; i++) {
-        if (i && i % BOARD_SIZE == 0) {
-            row++;
-            col = 0;
-        }
-
-        uint8_t cell = board->cells[i];
-
-        if (cell == 0) {
-            mvaddch(debug_start_row + row * 2, debug_start_col + col * 2, '0');
-        } else {
-            attron(COLOR_PAIR(cell_color(cell)) | A_BOLD);
-            mvaddch(debug_start_row + row * 2, debug_start_col + col * 2, cell_symbol(cell));
-            attroff(COLOR_PAIR(cell_color(cell)) | A_BOLD);
-        }
-
-        col++;
-    }
-#endif
 }
 
 static void render_won_lost(bool won) {
@@ -100,6 +102,10 @@ void game_render(Game* game) {
     }
 
     clear();
+
+#ifdef DEBUG
+    render_answer(&game->board);
+#endif
 
     render_window();
 

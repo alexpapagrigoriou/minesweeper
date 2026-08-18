@@ -8,14 +8,11 @@
 #include "layout.h"
 
 void render_window(void) {
-    clear();
     render_filled_box(win_start_row, win_start_col, WIN_ROWS, WIN_COLS, CP_BOX);
 
 #ifdef DEBUG
     render_text(win_start_row, win_start_col, "[DEBUG MODE]", CP_BOX, A_BOLD);
 #endif
-
-    refresh();
 }
 
 void render_text(int row, int col, const char* msg, int color_pair, int attrs) {
