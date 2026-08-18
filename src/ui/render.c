@@ -32,10 +32,15 @@ void render_text_centered_col(int row, const char* msg, int color_pair, int attr
 void render_box(int row, int col, int rows, int cols, int color_pair) {
     attron(COLOR_PAIR(color_pair));
 
-    mvhline(row, col, ' ', cols);
-    mvvline(row, col, ' ', rows);
-    mvhline(row + rows - 1, col, ' ', cols);
-    mvvline(row, col + cols - 1, ' ', rows);
+    mvhline(row, col, ACS_HLINE, cols);
+    mvvline(row, col, ACS_VLINE, rows);
+    mvhline(row + rows - 1, col, ACS_HLINE, cols);
+    mvvline(row, col + cols - 1, ACS_VLINE, rows);
+
+    mvaddch(row, col, ACS_ULCORNER);
+    mvaddch(row, col + cols - 1, ACS_URCORNER);
+    mvaddch(row + rows - 1, col, ACS_LLCORNER);
+    mvaddch(row + rows - 1, col + cols - 1, ACS_LRCORNER);
 
     attroff(COLOR_PAIR(color_pair));
 }

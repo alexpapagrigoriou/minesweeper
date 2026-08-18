@@ -19,13 +19,13 @@ Action input_get(void) {
     while (1) {
         int ch = getch();
 
-        if (ch == KEY_RESIZE) {
-            layout_update();
-            return action_create(-1, 0, false);
+        if (ch == 'q') {
+            return action_create(-1, ACTION_BACK, false);
         }
 
-        if (ch == 'q') {
-            return action_create(-1, -1, false);
+        if (ch == KEY_RESIZE) {
+            layout_update();
+            return action_create(-1, ACTION_RESIZE, false);
         }
 
         if (ch == KEY_MOUSE) {

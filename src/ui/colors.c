@@ -20,6 +20,8 @@ void colors_init(void) {
     init_pair(CP_MINE, COLOR_RED, COLOR_BLACK);
     init_pair(CP_REVEALED_MINE, COLOR_BLACK, COLOR_RED);
 
+    init_pair(CP_TERM_SMALL, COLOR_RED, COLOR_BLACK);
+
     init_pair(CP_FLAG, COLOR_RED, COLOR_CYAN);
     init_pair(CP_WRONG_FLAG, COLOR_RED, COLOR_YELLOW);
 
@@ -30,8 +32,12 @@ void colors_init(void) {
     init_pair(CP_GRID, COLOR_WHITE, COLOR_BLACK);
     init_pair(CP_CELL, COLOR_BLACK, COLOR_CYAN);
 
-    init_pair(CP_TERM_SMALL, COLOR_RED, COLOR_BLACK);
     init_pair(CP_WON, COLOR_GREEN, COLOR_BLACK);
     init_pair(CP_LOST, COLOR_RED, COLOR_BLACK);
     init_pair(CP_PLAY_AGAIN, COLOR_BLACK, COLOR_GREEN);
+
+    init_pair(CP_TITLE, COLOR_BLACK, COLOR_CYAN);
+    init_pair(CP_PLAY, COLOR_BLACK, COLOR_GREEN);
+    init_pair(CP_CREDITS, COLOR_BLACK, COLOR_YELLOW);
+    init_pair(CP_QUIT, COLOR_BLACK, COLOR_RED);
 }

@@ -11,15 +11,21 @@ enum {
 
     CP_BKGD,
 
+    CP_TERM_SMALL,
+
     CP_EXIT,
     CP_BOX,
     CP_GRID,
     CP_CELL,
 
-    CP_TERM_SMALL,
     CP_WON,
     CP_LOST,
-    CP_PLAY_AGAIN
+    CP_PLAY_AGAIN,
+
+    CP_TITLE,
+    CP_PLAY,
+    CP_CREDITS,
+    CP_QUIT
 };
 
 void colors_init(void);

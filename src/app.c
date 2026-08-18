@@ -39,6 +39,9 @@ void app_run(App* app) {
                 break;
             case APP_CREDITS:
                 // app->state = credits_run();
+
+                // TODO: remove when credits are implemented
+                app->state = APP_QUIT;
                 break;
             case APP_QUIT:
                 break;

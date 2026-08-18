@@ -2,17 +2,19 @@
 
 #include <stdbool.h>
 
-#define TITLE_ROWS 1
-#define TITLE_COLS 11
+#define TITLE_TOP_OFFSET 2
 
-#define TITLE_TOP_OFFSET 1
+#define TITLE_ROWS 3
+#define TITLE_COLS 15
 
-#define TITLE_BUTTON_ROW_OFFSET 2
+#define TITLE_BUTTON_ROW_OFFSET 5
 
-#define BUTTON_ROWS 3
-#define BUTTON_COLS 10
+#define BUTTONS 3
 
-#define BUTTONS_OFFSET 1
+#define BUTTON_ROWS 7
+#define BUTTON_COLS 27
+
+#define BUTTONS_OFFSET 3
 
 typedef enum {
     BUTTON_PLAY,
@@ -20,7 +22,6 @@ typedef enum {
     BUTTON_QUIT,
 } Button;
 
-extern int title_start_row, title_start_col;
 extern int buttons_start_row, buttons_start_col;
 
 void menu_layout_update(void);
