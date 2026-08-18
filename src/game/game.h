@@ -17,4 +17,5 @@ typedef struct {
 } Game;
 
 void game_init(Game* game);
+
 AppState game_run(void);
