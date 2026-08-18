@@ -14,13 +14,15 @@
 
 #define BUTTONS_OFFSET 1
 
+typedef enum {
+    BUTTON_PLAY,
+    BUTTON_CREDITS,
+    BUTTON_QUIT,
+} Button;
+
 extern int title_start_row, title_start_col;
-extern int play_button_start_row, play_button_start_col;
-extern int credits_button_start_row, credits_button_start_col;
-extern int quit_button_start_row, quit_button_start_col;
+extern int buttons_start_row, buttons_start_col;
 
 void menu_layout_update(void);
 
-bool menu_layout_is_play_button(int row, int col);
-bool menu_layout_is_credits_button(int row, int col);
-bool menu_layout_is_quit_button(int row, int col);
+bool menu_layout_is_button(Button button, int row, int col);
