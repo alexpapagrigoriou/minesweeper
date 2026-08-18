@@ -6,6 +6,7 @@
 #include "menu/menu.h"
 #include "ui/colors.h"
 #include "ui/layout.h"
+#include "util/random.h"
 #include "util/sound.h"
 
 void app_init(App* app) {
@@ -16,9 +17,12 @@ void app_init(App* app) {
     mousemask(ALL_MOUSE_EVENTS | REPORT_MOUSE_POSITION, NULL);
     curs_set(FALSE);
 
-    colors_init();
-    layout_update();
+    random_init();
     sound_init();
+
+    colors_init();
+
+    layout_update();
 
     app->state = APP_MENU;
     app->render = true;

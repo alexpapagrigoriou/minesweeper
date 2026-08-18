@@ -8,8 +8,6 @@
 void board_init(Board* board) {
     memset(board, 0, sizeof(*board));
 
-    random_init();
-
     for (int i = 0; i < MINE_COUNT; i++) {
         while (1) {
             int mine = random_range(0, BOARD_SIZE * BOARD_SIZE - 1);
