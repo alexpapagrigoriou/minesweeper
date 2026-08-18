@@ -7,7 +7,7 @@
 #define TITLE_ROWS 3
 #define TITLE_COLS 15
 
-#define TITLE_BUTTON_ROW_OFFSET 5
+#define TITLE_BUTTONS_ROW_OFFSET 5
 
 #define BUTTONS 3
 

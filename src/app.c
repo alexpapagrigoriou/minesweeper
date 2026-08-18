@@ -2,6 +2,7 @@
 
 #include <ncurses.h>
 
+#include "credits/credits.h"
 #include "game/game.h"
 #include "menu/menu.h"
 #include "ui/colors.h"
@@ -38,10 +39,7 @@ void app_run(App* app) {
                 app->state = game_run();
                 break;
             case APP_CREDITS:
-                // app->state = credits_run();
-
-                // TODO: remove when credits are implemented
-                app->state = APP_QUIT;
+                app->state = credits_run();
                 break;
             case APP_QUIT:
                 break;

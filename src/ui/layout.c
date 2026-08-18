@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "colors.h"
+#include "credits_layout.h"
 #include "game_layout.h"
 #include "menu_layout.h"
 #include "render.h"
@@ -56,4 +57,5 @@ void layout_update(void) {
 
     menu_layout_update();
     game_layout_update();
+    credits_layout_update();
 }

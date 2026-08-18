@@ -23,9 +23,12 @@ enum {
     CP_PLAY_AGAIN,
 
     CP_TITLE,
-    CP_PLAY,
+    CP_BUTTON_PLAY,
+    CP_BUTTON_CREDITS,
+    CP_BUTTON_QUIT,
+
     CP_CREDITS,
-    CP_QUIT
+    CP_BACK_BUTTON
 };
 
 void colors_init(void);

@@ -5,7 +5,7 @@
 int buttons_start_row, buttons_start_col;
 
 void menu_layout_update(void) {
-    buttons_start_row = win_start_row + TITLE_TOP_OFFSET + TITLE_BUTTON_ROW_OFFSET;
+    buttons_start_row = win_start_row + TITLE_TOP_OFFSET + TITLE_BUTTONS_ROW_OFFSET;
     buttons_start_col = (term_cols - BUTTON_COLS) / 2;
 }
 

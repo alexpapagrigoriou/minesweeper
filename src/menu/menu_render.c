@@ -17,7 +17,7 @@ static void render_title(void) {
 
 static void render_buttons(void) {
     char* button_texts[] = {"Play", "Credits", "Quit"};
-    int button_color_pairs[] = {CP_PLAY, CP_CREDITS, CP_QUIT};
+    int button_color_pairs[] = {CP_BUTTON_PLAY, CP_BUTTON_CREDITS, CP_BUTTON_QUIT};
 
     for (int i = 0; i < BUTTONS; i++) {
         int row = buttons_start_row + ((int)i * (BUTTON_ROWS + BUTTONS_OFFSET));

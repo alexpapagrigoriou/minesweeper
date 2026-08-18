@@ -93,7 +93,8 @@ static void render_won_lost(bool won) {
 }
 
 static void render_play_again(void) {
-    render_text(play_again_start_row, play_again_start_col, " Play Again ", CP_PLAY_AGAIN, A_BOLD);
+    render_filled_box(play_again_start_row, play_again_start_col, PLAY_AGAIN_ROWS, PLAY_AGAIN_COLS, CP_PLAY_AGAIN);
+    render_text_centered_col(play_again_start_row + (PLAY_AGAIN_ROWS / 2), "Play Again", CP_PLAY_AGAIN, A_BOLD);
 }
 
 void game_render(Game* game) {
