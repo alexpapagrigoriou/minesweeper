@@ -48,5 +48,7 @@ void app_run(App* app) {
 }
 
 void app_cleanup(void) {
+    sound_cleanup();
+
     endwin();
 }
