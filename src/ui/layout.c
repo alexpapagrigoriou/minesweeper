@@ -4,6 +4,8 @@
 #include <string.h>
 
 #include "colors.h"
+#include "game_layout.h"
+#include "menu_layout.h"
 #include "render.h"
 
 int term_rows, term_cols;
@@ -52,5 +54,6 @@ void layout_update(void) {
     win_start_row = (term_rows - WIN_ROWS) / 2;
     win_start_col = (term_cols - WIN_COLS) / 2;
 
+    menu_layout_update();
     game_layout_update();
 }

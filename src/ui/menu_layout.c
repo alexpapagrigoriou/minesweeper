@@ -22,16 +22,16 @@ void menu_layout_update(void) {
 }
 
 bool menu_layout_is_play_button(int row, int col) {
-    return row >= play_button_start_row && row < play_button_start_row &&
+    return row >= play_button_start_row && row < play_button_start_row + BUTTON_ROWS &&
            col >= play_button_start_col && col < play_button_start_col + BUTTON_COLS;
 }
 
 bool menu_layout_is_credits_button(int row, int col) {
-    return row >= credits_button_start_row && row < credits_button_start_row &&
+    return row >= credits_button_start_row && row < credits_button_start_row + BUTTON_ROWS &&
            col >= credits_button_start_col && col < credits_button_start_col + BUTTON_COLS;
 }
 
 bool menu_layout_is_quit_button(int row, int col) {
-    return row >= quit_button_start_row && row < quit_button_start_row &&
+    return row >= quit_button_start_row && row < quit_button_start_row + BUTTON_ROWS &&
            col >= quit_button_start_col && col < quit_button_start_col + BUTTON_COLS;
 }

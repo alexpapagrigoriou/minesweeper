@@ -1,3 +1,5 @@
 #pragma once
 
-void menu_run(void);
+#include "../app_state.h"
+
+AppState menu_run(void);

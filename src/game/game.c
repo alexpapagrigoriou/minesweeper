@@ -22,6 +22,5 @@ AppState game_run(void) {
         game_update(&game, input_get());
     }
 
-    // TODO: Change to APP_MENU when menu is implemented
-    return APP_QUIT;
+    return APP_MENU;
 }
