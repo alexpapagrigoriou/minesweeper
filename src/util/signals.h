@@ -1,7 +1,7 @@
 #pragma once
 
-#include <signal.h>
-
-extern volatile sig_atomic_t should_quit;
+#include <stdbool.h>
 
 void signals_init(void);
+
+bool signals_should_quit(void);

@@ -18,7 +18,7 @@ static Action action_create(int row, int col, bool is_left_click) {
 
 Action input_get(void) {
     while (1) {
-        if (should_quit) {
+        if (signals_should_quit()) {
             return action_create(-1, ACTION_QUIT, false);
         }
 
