@@ -83,8 +83,9 @@ Removes all generated build artifacts (`build/` and `bin/`).
 
 | Key | Action |
 | --- | --- |
-| Reveal a cell | Left click |
-| Flag a cell | Right click |
+| Left click | Reveal a cell |
+| Right click | Flag/unflag a cell |
+| q | Back |
 
 ## Third-Party Libraries
 
