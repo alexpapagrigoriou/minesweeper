@@ -29,14 +29,14 @@ static void render_credits_box(void) {
     credits_start_row++;
     render_text_centered_col(credits_start_row, "Credits", CP_CREDITS, A_BOLD | A_UNDERLINE);
 
-    credits_start_row += 5;
+    credits_start_row += CREDIT_CREDIT_ROW_OFFSET;
     render_text_centered_col(credits_start_row, "Created by", CP_CREDITS, A_UNDERLINE);
     credits_start_row++;
     render_text_centered_col(credits_start_row, "Alexandros", CP_CREDITS, A_BOLD);
     credits_start_row++;
     render_text_centered_col(credits_start_row, "Papagrigoriou", CP_CREDITS, A_BOLD);
 
-    credits_start_row += 5;
+    credits_start_row += CREDIT_CREDIT_ROW_OFFSET;
     render_text_centered_col(credits_start_row, "GitHub", CP_CREDITS, A_UNDERLINE);
     credits_start_row++;
     render_text_centered_col(credits_start_row, "https://github.com/", CP_CREDITS, A_BOLD);
