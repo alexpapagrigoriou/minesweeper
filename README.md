@@ -37,6 +37,8 @@ make debug
 
 Output binary: `bin/debug/minesweeper`.
 
+> **Note:** the debug build prints the board fully revealed next to the window for testing. This is not present in the release build.
+
 ### Release build
 
 ```bash
@@ -83,6 +85,12 @@ Removes all generated build artifacts (`build/` and `bin/`).
 | --- | --- |
 | Reveal a cell | Left click |
 | Flag a cell | Right click |
+
+## Third-Party Libraries
+
+This project uses the following libraries:
+- [miniaudio](https://github.com/mackron/miniaudio)
+- [incbin](https://github.com/graphitemaster/incbin)
 
 ## License
 

@@ -2,10 +2,10 @@
 
 #define INCBIN_PREFIX asset_
 #define INCBIN_STYLE INCBIN_STYLE_SNAKE
-#include "../vendor/incbin.h"
+#include "../../third_party/incbin.h"
 
 #define MINIAUDIO_IMPLEMENTATION
-#include "../vendor/miniaudio.h"
+#include "../../third_party/miniaudio.h"
 
 INCBIN(tick_wav, "assets/sounds/tick.wav");
 INCBIN(win_wav, "assets/sounds/win.wav");
