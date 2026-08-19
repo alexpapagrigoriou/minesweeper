@@ -24,7 +24,9 @@ void game_update(Game* game, Action action) {
     game->render = false;
 
     if (action.row == -1) {
-        if (action.col == ACTION_BACK) {
+        if (action.col == ACTION_QUIT) {
+            game->state = GAME_QUIT;
+        } else if (action.col == ACTION_BACK) {
             game->state = GAME_EXIT;
         } else if (action.col == ACTION_RESIZE) {
             game->render = true;

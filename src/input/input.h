@@ -2,8 +2,11 @@
 
 #include <stdbool.h>
 
-#define ACTION_BACK 0
-#define ACTION_RESIZE 1
+enum {
+    ACTION_QUIT,
+    ACTION_BACK,
+    ACTION_RESIZE
+};
 
 typedef struct {
     int row;

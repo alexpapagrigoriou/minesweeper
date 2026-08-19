@@ -8,9 +8,12 @@
 #include "ui/colors.h"
 #include "ui/layout.h"
 #include "util/random.h"
+#include "util/signals.h"
 #include "util/sound.h"
 
 void app_init(App* app) {
+    signals_init();
+
     initscr();
     cbreak();
     noecho();

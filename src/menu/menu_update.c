@@ -5,7 +5,9 @@
 
 void menu_update(AppState* state, Action action) {
     if (action.row == -1) {
-        if (action.col == ACTION_BACK) {
+        if (action.col == ACTION_QUIT) {
+            *state = APP_QUIT;
+        } else if (action.col == ACTION_BACK) {
             *state = APP_QUIT;
         } else if (action.col == ACTION_RESIZE) {
             menu_render();

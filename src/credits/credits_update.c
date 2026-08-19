@@ -5,8 +5,10 @@
 
 void credits_update(AppState* state, Action action) {
     if (action.row == -1) {
-        if (action.col == ACTION_BACK) {
-            *state = APP_MENU;
+        if (action.col == ACTION_QUIT) {
+            *state = APP_QUIT;
+        } else if (action.col == ACTION_BACK) {
+            *state = APP_QUIT;
         } else if (action.col == ACTION_RESIZE) {
             credits_render();
         }

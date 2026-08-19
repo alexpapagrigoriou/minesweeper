@@ -4,6 +4,7 @@
 #include <stdbool.h>
 
 #include "../ui/layout.h"
+#include "../util/signals.h"
 
 static Action action_create(int row, int col, bool is_left_click) {
     Action action;
@@ -17,6 +18,10 @@ static Action action_create(int row, int col, bool is_left_click) {
 
 Action input_get(void) {
     while (1) {
+        if (should_quit) {
+            return action_create(-1, ACTION_QUIT, false);
+        }
+
         int ch = getch();
 
         if (ch == 'q') {

@@ -20,6 +20,10 @@ AppState game_run(void) {
         game_render(&game);
 
         game_update(&game, input_get());
+
+        if (game.state == GAME_QUIT) {
+            return APP_QUIT;
+        }
     }
 
     return APP_MENU;
