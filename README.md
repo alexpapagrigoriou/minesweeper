@@ -90,8 +90,9 @@ Removes all generated build artifacts (`build/` and `bin/`).
 ## Third-Party Libraries
 
 This project uses the following libraries:
-- [miniaudio](https://github.com/mackron/miniaudio)
+
 - [incbin](https://github.com/graphitemaster/incbin)
+- [miniaudio](https://github.com/mackron/miniaudio)
 
 ## License
 
