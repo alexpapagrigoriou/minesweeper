@@ -45,8 +45,8 @@ static void render_credits_box(void) {
 }
 
 static void render_back_button(void) {
-    render_filled_box(back_button_start_row, back_button_start_col, BACK_BUTTON_ROWS, BACK_BUTTON_COLS, CP_BACK_BUTTON);
-    render_text_centered_col(back_button_start_row + (BACK_BUTTON_ROWS / 2), "Back to Menu", CP_BACK_BUTTON, A_BOLD);
+    render_filled_box(credits_back_button_start_row, credits_back_button_start_col, BACK_BUTTON_ROWS, BACK_BUTTON_COLS, CP_BACK_BUTTON);
+    render_text_centered_col(credits_back_button_start_row + (BACK_BUTTON_ROWS / 2), "Back to Menu", CP_BACK_BUTTON, A_BOLD);
 }
 
 void credits_render(void) {

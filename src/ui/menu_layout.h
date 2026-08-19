@@ -22,7 +22,7 @@ typedef enum {
     BUTTON_QUIT,
 } Button;
 
-extern int buttons_start_row, buttons_start_col;
+extern int menu_buttons_start_row, menu_buttons_start_col;
 
 void menu_layout_update(void);
 

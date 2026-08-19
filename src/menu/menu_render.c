@@ -20,11 +20,11 @@ static void render_buttons(void) {
     int button_color_pairs[] = {CP_BUTTON_PLAY, CP_BUTTON_CREDITS, CP_BUTTON_QUIT};
 
     for (int i = 0; i < BUTTONS; i++) {
-        int row = buttons_start_row + ((int)i * (BUTTON_ROWS + BUTTONS_OFFSET));
+        int row = menu_buttons_start_row + ((int)i * (BUTTON_ROWS + BUTTONS_OFFSET));
 
-        render_filled_box(row, buttons_start_col, BUTTON_ROWS, BUTTON_COLS, button_color_pairs[i]);
+        render_filled_box(row, menu_buttons_start_col, BUTTON_ROWS, BUTTON_COLS, button_color_pairs[i]);
         render_text_centered_col(row + (BUTTON_ROWS / 2), button_texts[i], button_color_pairs[i], A_BOLD);
-        render_box(row, buttons_start_col, BUTTON_ROWS, BUTTON_COLS, button_color_pairs[i]);
+        render_box(row, menu_buttons_start_col, BUTTON_ROWS, BUTTON_COLS, button_color_pairs[i]);
     }
 }
 

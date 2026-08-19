@@ -17,9 +17,9 @@
 #define PLAY_AGAIN_ROWS 1
 #define PLAY_AGAIN_COLS 12
 
-extern int exit_start_row, exit_start_col;
-extern int board_start_row, board_start_col;
-extern int play_again_start_row, play_again_start_col;
+extern int game_exit_start_row, game_exit_start_col;
+extern int game_board_start_row, game_board_start_col;
+extern int game_play_again_start_row, game_play_again_start_col;
 
 void game_layout_update(void);
 
