@@ -3,9 +3,10 @@
 #include <stdbool.h>
 
 enum {
+    ACTION_RESIZE,
     ACTION_QUIT,
     ACTION_BACK,
-    ACTION_RESIZE
+    ACTION_RESET
 };
 
 typedef struct {

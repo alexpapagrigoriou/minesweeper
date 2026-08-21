@@ -24,13 +24,17 @@ Action input_get(void) {
 
         int ch = getch();
 
+        if (ch == KEY_RESIZE) {
+            layout_update();
+            return action_create(-1, ACTION_RESIZE, false);
+        }
+
         if (ch == 'q') {
             return action_create(-1, ACTION_BACK, false);
         }
 
-        if (ch == KEY_RESIZE) {
-            layout_update();
-            return action_create(-1, ACTION_RESIZE, false);
+        if (ch == 'r') {
+            return action_create(-1, ACTION_RESET, false);
         }
 
         if (ch == KEY_MOUSE) {
