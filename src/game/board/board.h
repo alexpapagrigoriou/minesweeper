@@ -22,7 +22,7 @@ typedef struct {
     uint64_t flagged;
 } Board;
 
-void board_init(Board* board);
+void board_init(Board* board, int index);
 
 bool board_is_complete(Board* board);
 

@@ -1,5 +1,7 @@
 #include "game_update.h"
 
+#include <stdbool.h>
+
 #include "../ui/game_layout.h"
 #include "../util/sound.h"
 #include "rules/reveal.h"
@@ -49,36 +51,41 @@ void game_update(Game* game, Action action) {
         return;
     }
 
-    int cell = game_layout_get_board_cell(action.row, action.col);
+    int index = game_layout_get_board_index(action.row, action.col);
 
-    if (cell == -1) {
+    if (index == -1) {
         return;
     }
 
-    if (board_is_revealed(&game->board, cell)) {
+    if (game->first_move) {
+        board_init(&game->board, action.is_left_click ? index : -1);
+        game->first_move = false;
+    }
+
+    if (board_is_revealed(&game->board, index)) {
         return;
     }
 
     if (!action.is_left_click) {
-        board_toggle_flag(&game->board, cell);
+        board_toggle_flag(&game->board, index);
         game->render = true;
 
         sound_play(SOUND_TICK);
         return;
     }
 
-    if (board_is_flagged(&game->board, cell)) {
+    if (board_is_flagged(&game->board, index)) {
         return;
     }
 
-    if (board_has_mine(&game->board, cell)) {
-        game->board.cells[cell] = REVEALED_MINE;
+    if (board_has_mine(&game->board, index)) {
+        game->board.cells[index] = REVEALED_MINE;
 
         game_lost(game);
         return;
     }
 
-    rules_reveal_cell(&game->board, cell);
+    rules_reveal_cell(&game->board, index);
     game->render = true;
 
     if (!board_is_complete(&game->board)) {

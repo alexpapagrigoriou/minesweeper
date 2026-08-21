@@ -5,14 +5,14 @@
 #include "../../util/position.h"
 #include "../../util/random.h"
 
-void board_init(Board* board) {
+void board_init(Board* board, int index) {
     memset(board, 0, sizeof(*board));
 
     for (int i = 0; i < MINE_COUNT; i++) {
         while (1) {
             int mine = random_range(0, BOARD_SIZE * BOARD_SIZE - 1);
 
-            if (board->cells[mine] == MINE) {
+            if (board->cells[mine] == MINE || mine == index) {
                 continue;
             }
 

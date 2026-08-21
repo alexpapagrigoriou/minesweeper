@@ -24,5 +24,5 @@ extern int game_play_again_start_row, game_play_again_start_col;
 void game_layout_update(void);
 
 bool game_layout_is_exit(int row, int col);
-int game_layout_get_board_cell(int row, int col);
+int game_layout_get_board_index(int row, int col);
 bool game_layout_is_play_again(int row, int col);

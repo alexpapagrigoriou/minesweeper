@@ -7,9 +7,9 @@
 #include "game_update.h"
 
 void game_init(Game* game) {
-    board_init(&game->board);
     game->state = GAME_RUNNING;
     game->render = true;
+    game->first_move = true;
 }
 
 AppState game_run(void) {

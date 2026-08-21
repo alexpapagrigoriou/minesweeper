@@ -23,7 +23,7 @@ bool game_layout_is_exit(int row, int col) {
            col >= game_exit_start_col && col < game_exit_start_col + EXIT_COLS;
 }
 
-int game_layout_get_board_cell(int row, int col) {
+int game_layout_get_board_index(int row, int col) {
     if (row < game_board_start_row + 1 || row > game_board_start_row + BOARD_ROWS - 2 ||
         col < game_board_start_col + 1 || col > game_board_start_col + BOARD_COLS - 2) {
         return -1;

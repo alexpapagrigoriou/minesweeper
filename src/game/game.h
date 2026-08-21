@@ -15,6 +15,7 @@ typedef struct {
     Board board;
     GameState state;
     bool render;
+    bool first_move;
 } Game;
 
 void game_init(Game* game);

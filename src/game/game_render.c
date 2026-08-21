@@ -1,6 +1,7 @@
 #include "game_render.h"
 
 #include <ncurses.h>
+#include <stdbool.h>
 
 #include "../ui/colors.h"
 #include "../ui/game_layout.h"
@@ -16,7 +17,7 @@ static void render_exit(void) {
 }
 
 #ifdef DEBUG
-static void render_answer(Board* board) {
+static void render_answer(Board* board, bool first_move) {
     int debug_start_row = win_start_row + 10;
     int debug_start_col = win_start_col + WIN_COLS + 1;
 
@@ -29,29 +30,39 @@ static void render_answer(Board* board) {
 
     for (int i = 0; i < BOARD_SIZE * BOARD_SIZE; i++) {
         if (i && i % BOARD_SIZE == 0) {
-            row++;
+            row += 2;
             col = 0;
         }
 
-        uint8_t cell = board->cells[i];
-
-        if (cell == 0) {
-            mvaddch(debug_start_row + row * 2, debug_start_col + col * 2, '0');
+        if (first_move) {
+            attron(A_BOLD);
+            mvaddch(debug_start_row + row, debug_start_col + col, '?');
+            attroff(A_BOLD);
         } else {
-            attron(COLOR_PAIR(cell_color(cell)) | A_BOLD);
-            mvaddch(debug_start_row + row * 2, debug_start_col + col * 2, cell_symbol(cell));
-            attroff(COLOR_PAIR(cell_color(cell)) | A_BOLD);
+            uint8_t cell = board->cells[i];
+
+            if (cell == 0) {
+                mvaddch(debug_start_row + row, debug_start_col + col, '0');
+            } else {
+                attron(COLOR_PAIR(cell_color(cell)) | A_BOLD);
+                mvaddch(debug_start_row + row, debug_start_col + col, cell_symbol(cell));
+                attroff(COLOR_PAIR(cell_color(cell)) | A_BOLD);
+            }
         }
 
-        col++;
+        col += 2;
     }
 }
 #endif
 
-static void render_board(Board* board) {
+static void render_board(Board* board, bool first_move) {
     render_filled_box(game_board_start_row + 1, game_board_start_col + 1, BOARD_ROWS - 2, BOARD_COLS - 2, CP_CELL);
 
     render_grid(game_board_start_row, game_board_start_col, BOARD_ROWS, BOARD_COLS, CELL_WALL_SIZE, CP_GRID);
+
+    if (first_move) {
+        return;
+    }
 
     for (int row = 0; row < BOARD_SIZE; row++) {
         for (int col = 0; col < BOARD_SIZE; col++) {
@@ -105,13 +116,13 @@ void game_render(Game* game) {
     clear();
 
 #ifdef DEBUG
-    render_answer(&game->board);
+    render_answer(&game->board, game->first_move);
 #endif
 
     render_window();
 
     render_exit();
-    render_board(&game->board);
+    render_board(&game->board, game->first_move);
 
     if (game->state != GAME_RUNNING) {
         render_won_lost(game->state == GAME_WON);
