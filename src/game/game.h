@@ -13,6 +13,7 @@ typedef enum {
 
 typedef struct {
     Board board;
+    int mines;
     GameState state;
     bool render;
     bool first_move;
@@ -20,4 +21,4 @@ typedef struct {
 
 void game_init(Game* game);
 
-AppState game_run(void);
+AppState game_run(int mines);

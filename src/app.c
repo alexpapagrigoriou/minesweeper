@@ -39,7 +39,8 @@ void app_run(App* app) {
                 app->state = menu_run();
                 break;
             case APP_GAME:
-                app->state = game_run();
+                // TODO: pass number of mines from difficulty menu
+                app->state = game_run(10);
                 break;
             case APP_CREDITS:
                 app->state = credits_run();

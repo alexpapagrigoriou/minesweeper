@@ -62,7 +62,7 @@ void game_update(Game* game, Action action) {
     }
 
     if (game->first_move) {
-        board_init(&game->board, action.is_left_click ? index : -1);
+        board_init(&game->board, game->mines, action.is_left_click ? index : -1);
         game->first_move = false;
     }
 

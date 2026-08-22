@@ -12,8 +12,6 @@
 #define FLAG 11
 #define WRONG_FLAG 12
 
-#define MINE_COUNT 10
-
 typedef struct {
     uint8_t cells[CELL_COUNT];
 
@@ -22,7 +20,7 @@ typedef struct {
     uint64_t flagged;
 } Board;
 
-void board_init(Board* board, int index);
+void board_init(Board* board, int mines, int index);
 
 bool board_is_complete(Board* board);
 

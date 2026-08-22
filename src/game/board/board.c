@@ -5,10 +5,10 @@
 #include "../../util/position.h"
 #include "../../util/random.h"
 
-void board_init(Board* board, int index) {
+void board_init(Board* board, int mines, int index) {
     memset(board, 0, sizeof(*board));
 
-    for (int i = 0; i < MINE_COUNT; i++) {
+    for (int i = 0; i < mines; i++) {
         while (1) {
             int mine = random_range(0, BOARD_SIZE * BOARD_SIZE - 1);
 

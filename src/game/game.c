@@ -12,8 +12,9 @@ void game_init(Game* game) {
     game->first_move = true;
 }
 
-AppState game_run(void) {
+AppState game_run(int mines) {
     Game game;
+    game.mines = mines;
     game_init(&game);
 
     while (game.state != GAME_EXIT) {
