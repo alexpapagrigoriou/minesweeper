@@ -28,7 +28,7 @@ static void render_answer(Board* board, bool first_move) {
 
     row++;
 
-    for (int i = 0; i < BOARD_SIZE * BOARD_SIZE; i++) {
+    for (int i = 0; i < CELL_COUNT; i++) {
         if (i && i % BOARD_SIZE == 0) {
             row += 2;
             col = 0;

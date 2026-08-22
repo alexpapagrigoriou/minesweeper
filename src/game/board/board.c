@@ -1,5 +1,6 @@
 #include "board.h"
 
+#include <stdint.h>
 #include <string.h>
 
 #include "../../util/position.h"
@@ -8,9 +9,18 @@
 void board_init(Board* board, int mines, int index) {
     memset(board, 0, sizeof(*board));
 
+    if (mines >= CELL_COUNT) {
+        for (int i = 0; i < CELL_COUNT; i++) {
+            board->cells[i] = MINE;
+        }
+        board->mines = UINT64_MAX;
+
+        return;
+    }
+
     for (int i = 0; i < mines; i++) {
         while (1) {
-            int mine = random_range(0, BOARD_SIZE * BOARD_SIZE - 1);
+            int mine = random_range(0, CELL_COUNT - 1);
 
             if (board->cells[mine] == MINE || mine == index) {
                 continue;
