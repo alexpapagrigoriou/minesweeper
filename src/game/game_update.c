@@ -32,7 +32,7 @@ void game_update(Game* game, Action action) {
             game->state = GAME_QUIT;
         } else if (action.col == ACTION_BACK) {
             game->state = GAME_EXIT;
-        } else if (action.col == ACTION_RESET) {
+        } else if (action.col == ACTION_RESTART) {
             game_init(game);
         }
 

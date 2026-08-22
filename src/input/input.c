@@ -34,7 +34,7 @@ Action input_get(void) {
         }
 
         if (ch == 'r') {
-            return action_create(-1, ACTION_RESET, false);
+            return action_create(-1, ACTION_RESTART, false);
         }
 
         if (ch == KEY_MOUSE) {

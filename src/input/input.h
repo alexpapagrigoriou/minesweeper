@@ -6,7 +6,7 @@ enum {
     ACTION_RESIZE,
     ACTION_QUIT,
     ACTION_BACK,
-    ACTION_RESET
+    ACTION_RESTART
 };
 
 typedef struct {
