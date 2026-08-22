@@ -33,7 +33,9 @@ void game_update(Game* game, Action action) {
         } else if (action.col == ACTION_BACK) {
             game->state = GAME_EXIT;
         } else if (action.col == ACTION_RESTART) {
-            game_init(game);
+            if (!game->first_move) {
+                game_init(game);
+            }
         }
 
         return;
