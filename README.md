@@ -88,13 +88,13 @@ Removes all generated build artifacts (`build/` and `bin/`).
 | q | Back |
 | r | Restart |
 
-## Third-Party Libraries
-
-This project uses the following libraries:
-
-- [incbin](https://github.com/graphitemaster/incbin)
-- [miniaudio](https://github.com/mackron/miniaudio)
-
 ## License
 
 MIT. See [LICENSE](LICENSE).
+
+## Third-Party Libraries
+
+| Library | Repository | License |
+| --- | --- | --- |
+| incbin | [GitHub](https://github.com/graphitemaster/incbin) | [Unlicense](third_party/incbin/UNLICENSE) |
+| miniaudio | [GitHub](https://github.com/mackron/miniaudio) | [Unlicense / MIT No Attributon](third_party/miniaudio/LICENSE) |
