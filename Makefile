@@ -23,7 +23,7 @@ THIRD_PARTY_SRCS := $(shell find $(THIRD_PARTY_DIR) -name '*.c')
 DEBUG_OBJS += $(THIRD_PARTY_SRCS:$(THIRD_PARTY_DIR)/%.c=$(DEBUG_BUILD_DIR)/%.o)
 RELEASE_OBJS += $(THIRD_PARTY_SRCS:$(THIRD_PARTY_DIR)/%.c=$(RELEASE_BUILD_DIR)/%.o)
 
-DEPS := $(shell find $(BUILD_DIR) -name '*.d' 2>/dev/null)
+DEPS := $(DEBUG_OBJS:.o=.d) $(RELEASE_OBJS:.o=.d)
 -include $(DEPS)
 
 STD_FLAGS := -std=c11
@@ -44,8 +44,8 @@ THIRD_PARTY_CFLAGS_RELEASE := $(THIRD_PARTY_FLAGS) $(RELEASE_MODE_FLAGS)
 
 LDLIBS := -lncurses -lpthread -lm
 
-LDFLAGS_DEBUG := $(LDLIBS)
-LDFLAGS_RELEASE := $(LDLIBS)
+LDFLAGS_DEBUG :=
+LDFLAGS_RELEASE :=
 
 .DEFAULT_GOAL := debug
 
@@ -57,7 +57,7 @@ run-debug: debug
 	@./$(DEBUG_BIN_DIR)/$(TARGET)
 
 $(DEBUG_BIN_DIR)/$(TARGET): $(DEBUG_OBJS) | $(DEBUG_BIN_DIR)
-	$(CC) $^ -o $@ $(LDFLAGS_DEBUG)
+	$(CC) $(LDFLAGS_DEBUG) $^ -o $@ $(LDLIBS)
 
 $(DEBUG_BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(DEBUG_BUILD_DIR)
 	@mkdir -p $(dir $@)
@@ -73,7 +73,7 @@ run-release: release
 	@./$(RELEASE_BIN_DIR)/$(TARGET)
 
 $(RELEASE_BIN_DIR)/$(TARGET): $(RELEASE_OBJS) | $(RELEASE_BIN_DIR)
-	$(CC) $^ -o $@ $(LDFLAGS_RELEASE)
+	$(CC) $(LDFLAGS_RELEASE) $^ -o $@ $(LDLIBS)
 	@strip $@
 
 $(RELEASE_BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(RELEASE_BUILD_DIR)
