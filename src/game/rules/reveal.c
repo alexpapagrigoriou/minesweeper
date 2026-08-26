@@ -4,7 +4,7 @@
 
 #include "../../util/position.h"
 
-static void rules_flood_reveal(Board* board, int start) {
+static void rules_flood_reveal(Board *board, int start) {
     int queue[CELL_COUNT];
     int head = 0;
     int tail = 0;
@@ -51,7 +51,7 @@ static void rules_flood_reveal(Board* board, int start) {
     }
 }
 
-void rules_reveal_cell(Board* board, int index) {
+void rules_reveal_cell(Board *board, int index) {
     if (board->cells[index] == 0) {
         rules_flood_reveal(board, index);
     } else {

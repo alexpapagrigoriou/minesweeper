@@ -6,14 +6,14 @@
 #include "../util/sound.h"
 #include "rules/reveal.h"
 
-static void game_won(Game* game) {
+static void game_won(Game *game) {
     game->board.flagged = game->board.mines;
     game->state = GAME_WON;
 
     sound_play(SOUND_WIN);
 }
 
-static void game_lost(Game* game) {
+static void game_lost(Game *game) {
     game->board.revealed |= game->board.mines & ~game->board.flagged;
     game->board.revealed |= game->board.flagged & ~game->board.mines;
     game->state = GAME_LOST;
@@ -22,7 +22,7 @@ static void game_lost(Game* game) {
     sound_play(SOUND_LOSE);
 }
 
-void game_update(Game* game, Action action) {
+void game_update(Game *game, Action action) {
     game->render = false;
 
     if (action.row == -1) {

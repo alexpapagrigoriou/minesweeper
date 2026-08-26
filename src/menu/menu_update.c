@@ -3,7 +3,7 @@
 #include "../ui/menu_layout.h"
 #include "menu_render.h"
 
-void menu_update(AppState* state, Action action) {
+void menu_update(AppState *state, Action action) {
     if (action.row == -1) {
         if (action.col == ACTION_QUIT) {
             *state = APP_QUIT;

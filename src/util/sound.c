@@ -11,7 +11,7 @@ INCBIN(win_wav, "assets/sounds/win.wav");
 INCBIN(lose_wav, "assets/sounds/lose.wav");
 
 typedef struct {
-    const unsigned char* data;
+    const unsigned char *data;
     unsigned int size;
 } SoundAsset;
 

@@ -17,7 +17,7 @@ static void render_exit(void) {
 }
 
 #ifdef DEBUG
-static void render_answer(Board* board, bool first_move) {
+static void render_answer(Board *board, bool first_move) {
     int debug_start_row = win_start_row + 10;
     int debug_start_col = win_start_col + WIN_COLS + 1;
 
@@ -55,7 +55,7 @@ static void render_answer(Board* board, bool first_move) {
 }
 #endif
 
-static void render_board(Board* board, bool first_move) {
+static void render_board(Board *board, bool first_move) {
     render_filled_box(game_board_start_row + 1, game_board_start_col + 1, BOARD_ROWS - 2, BOARD_COLS - 2, CP_CELL);
 
     render_grid(game_board_start_row, game_board_start_col, BOARD_ROWS, BOARD_COLS, CELL_WALL_SIZE, CP_GRID);
@@ -108,7 +108,7 @@ static void render_play_again(void) {
     render_text_centered_col(game_play_again_start_row + (PLAY_AGAIN_ROWS / 2), "Play Again", CP_PLAY_AGAIN, A_BOLD);
 }
 
-void game_render(Game* game) {
+void game_render(Game *game) {
     if (!game->render) {
         return;
     }

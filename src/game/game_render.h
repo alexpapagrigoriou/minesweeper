@@ -2,4 +2,4 @@
 
 #include "game.h"
 
-void game_render(Game* game);
+void game_render(Game *game);

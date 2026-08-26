@@ -11,7 +11,7 @@
 #include "util/signals.h"
 #include "util/sound.h"
 
-void app_init(App* app) {
+void app_init(App *app) {
     signals_init();
 
     initscr();
@@ -32,21 +32,21 @@ void app_init(App* app) {
     app->render = true;
 }
 
-void app_run(App* app) {
+void app_run(App *app) {
     while (app->state != APP_QUIT) {
         switch (app->state) {
-            case APP_MENU:
-                app->state = menu_run();
-                break;
-            case APP_GAME:
-                // TODO: pass number of mines from difficulty menu
-                app->state = game_run(10);
-                break;
-            case APP_CREDITS:
-                app->state = credits_run();
-                break;
-            case APP_QUIT:
-                break;
+        case APP_MENU:
+            app->state = menu_run();
+            break;
+        case APP_GAME:
+            // TODO: pass number of mines from difficulty menu
+            app->state = game_run(10);
+            break;
+        case APP_CREDITS:
+            app->state = credits_run();
+            break;
+        case APP_QUIT:
+            break;
         }
     }
 }

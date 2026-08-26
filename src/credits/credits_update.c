@@ -3,7 +3,7 @@
 #include "../ui/credits_layout.h"
 #include "credits_render.h"
 
-void credits_update(AppState* state, Action action) {
+void credits_update(AppState *state, Action action) {
     if (action.row == -1) {
         if (action.col == ACTION_QUIT) {
             *state = APP_QUIT;

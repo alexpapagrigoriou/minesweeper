@@ -9,6 +9,6 @@ typedef struct {
     bool render;
 } App;
 
-void app_init(App* app);
-void app_run(App* app);
+void app_init(App *app);
+void app_run(App *app);
 void app_cleanup(void);

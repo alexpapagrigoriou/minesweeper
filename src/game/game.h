@@ -19,6 +19,6 @@ typedef struct {
     bool first_move;
 } Game;
 
-void game_init(Game* game);
+void game_init(Game *game);
 
 AppState game_run(int mines);

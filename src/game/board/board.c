@@ -6,7 +6,7 @@
 #include "../../util/position.h"
 #include "../../util/random.h"
 
-void board_init(Board* board, int mines, int index) {
+void board_init(Board *board, int mines, int index) {
     memset(board, 0, sizeof(*board));
 
     if (mines >= CELL_COUNT) {
@@ -58,26 +58,26 @@ void board_init(Board* board, int mines, int index) {
     }
 }
 
-bool board_is_complete(Board* board) {
+bool board_is_complete(Board *board) {
     return ~(board->revealed | board->mines) == 0;
 }
 
-bool board_has_mine(Board* board, int index) {
+bool board_has_mine(Board *board, int index) {
     return board->mines & (UINT64_C(1) << index);
 }
 
-bool board_is_revealed(Board* board, int index) {
+bool board_is_revealed(Board *board, int index) {
     return board->revealed & (UINT64_C(1) << index);
 }
 
-bool board_is_flagged(Board* board, int index) {
+bool board_is_flagged(Board *board, int index) {
     return board->flagged & (UINT64_C(1) << index);
 }
 
-void board_reveal(Board* board, int index) {
+void board_reveal(Board *board, int index) {
     board->revealed |= UINT64_C(1) << index;
 }
 
-void board_toggle_flag(Board* board, int index) {
+void board_toggle_flag(Board *board, int index) {
     board->flagged ^= UINT64_C(1) << index;
 }

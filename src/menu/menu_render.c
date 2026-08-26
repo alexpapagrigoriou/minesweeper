@@ -16,7 +16,7 @@ static void render_title(void) {
 }
 
 static void render_buttons(void) {
-    char* button_texts[] = {"Play", "Credits", "Quit"};
+    char *button_texts[] = {"Play", "Credits", "Quit"};
     int button_color_pairs[] = {CP_BUTTON_PLAY, CP_BUTTON_CREDITS, CP_BUTTON_QUIT};
 
     for (int i = 0; i < BUTTONS; i++) {

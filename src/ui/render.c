@@ -15,17 +15,17 @@ void render_window(void) {
 #endif
 }
 
-void render_text(int row, int col, const char* msg, int color_pair, int attrs) {
+void render_text(int row, int col, const char *msg, int color_pair, int attrs) {
     attron(COLOR_PAIR(color_pair) | attrs);
     mvaddstr(row, col, msg);
     attroff(COLOR_PAIR(color_pair) | attrs);
 }
 
-void render_text_centered(const char* msg, int color_pair, int attrs) {
+void render_text_centered(const char *msg, int color_pair, int attrs) {
     render_text(term_rows / 2, (term_cols - strlen(msg)) / 2, msg, color_pair, attrs);
 }
 
-void render_text_centered_col(int row, const char* msg, int color_pair, int attrs) {
+void render_text_centered_col(int row, const char *msg, int color_pair, int attrs) {
     render_text(row, (term_cols - strlen(msg)) / 2, msg, color_pair, attrs);
 }
 
